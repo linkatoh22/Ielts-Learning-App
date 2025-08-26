@@ -29,25 +29,49 @@ const PicImg = styled.img`
 export default function WebPlan(){
     return(
 
-        <Box sx={{width:"100%",display:"flex",flexDirection:"column",alignItems:"center"}}>
-            <Typography>Các gói cước của website chúng tôi</Typography>
-            <Divider sx={{ my: 2 }}></Divider>
-            <Grid container 
-            spacing={10}
-            // sx={{display:"flex",justifyContent:"space-between",flexWrap:"wrap"}}
+        <Box sx={{
+            width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center"}}>
+
+            <Box sx={{textAlign:"center",mb: 6}}>
+                <Typography  
+                variant="h4"
+                component="h2"
+                sx={{
+                    fontWeight: 600,
+                    color: "#333",
+                    mb: 2,
+                }} 
+              >Chọn gói ôn luyện phù hợp với bạn </Typography>
+
+                <Typography 
+                
+                    variant="body1"
+                sx={{
+                    color: "#666",
+                    lineHeight: 1.6,
+                }}
+                    
+                >  Hệ thống cung cấp các gói đề thi VIP, gói chấm bài tự động & gói combo tiết kiệm, giúp bạn đạt B1 - B2 - C1 dễ dàng.</Typography>
+            </Box>
+            
+           
+            <Grid container
+            sx={{p:2}}
+            spacing={2}
+           
             
             >
 
                 <Grid size={4}>
-                    <SubscriptionCard type={"Free"}></SubscriptionCard>
+                    <SubscriptionCard type={0}></SubscriptionCard>
                 </Grid>
 
                 <Grid size={4}>
-                    <SubscriptionCard type={"Month"}></SubscriptionCard>
+                    <SubscriptionCard type={1}></SubscriptionCard>
                 </Grid>
 
                 <Grid size={4}>
-                    <SubscriptionCard type={"3 Months"}></SubscriptionCard>
+                    <SubscriptionCard type={2}></SubscriptionCard>
                 </Grid>
             
 

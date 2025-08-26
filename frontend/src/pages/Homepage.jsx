@@ -14,13 +14,14 @@ import {
 } from "@mui/material"
 import WebPlan from "../components/Homepage/WebPlan";
 import MenuTop from "../components/Homepage/MenuTop";
+import ServicesSection from "../components/Homepage/ServiceSection";
 export default function HomePage() {
   return (
-  
-      <Box>
+      <Box sx={{width:"100%",px:3,display:"flex",flexDirection:"column",gap:4}}>
           <MenuTop/>
+          <ServicesSection/>
           <WebPlan/>
+          
       </Box>
-    
     );
 }

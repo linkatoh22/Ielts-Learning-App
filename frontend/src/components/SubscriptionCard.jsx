@@ -12,8 +12,33 @@ import {
   Divider,
 } from "@mui/material"
 import { CheckCircle, Stars, AccessTime } from "@mui/icons-material"
-
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 const SubscriptionCard = ({type}) => {
+
+  const services = [
+    {
+      day: 7,
+      price: "10.000",
+      realPrice:10000
+    },
+
+    {
+       day: 30,
+       price: "30.000",
+       realPrice:30000
+      
+    },
+
+
+    {
+      day: 90,
+      price: "50.000",
+      realPrice:50000
+    }
+
+  ]
+
+
   const handlePayment = () => {
     console.log("Thanh toán được kích hoạt")
     // Xử lý logic thanh toán ở đây
@@ -22,11 +47,19 @@ const SubscriptionCard = ({type}) => {
   return (
     <Card
       sx={{
+        cursor:"pointer",
         width: "100%",
         margin: "auto",
         borderRadius: 3,
         boxShadow: "0 8px 32px rgba(0,0,0,0.1)",
         overflow: "hidden",
+
+        transition: "all 0.3s ease",
+                "&:hover": {
+                  borderColor: "#1976d2",
+                  transform: "translateY(-4px)",
+                  boxShadow: "0 8px 25px rgba(4, 22, 39, 0.15)",
+                },
       }}
     >
       <CardContent sx={{ padding: 3 }}>
@@ -34,7 +67,7 @@ const SubscriptionCard = ({type}) => {
         <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
           <Stars sx={{ color: "#1976d2", mr: 1 }} />
           <Typography variant="h6" sx={{ fontWeight: 600, color: "#1976d2" }}>
-            VIP 7 NGÀY
+            VIP { services[type].day } NGÀY
           </Typography>
         </Box>
 
@@ -47,7 +80,9 @@ const SubscriptionCard = ({type}) => {
             color: "#2c3e50",
           }}
         >
-          40.000 <span style={{ fontSize: "0.6em", fontWeight: 400 }}>VND</span>
+          {/* 40.000  */}
+         { services[type].price } 
+          <span style={{ fontSize: "0.6em", fontWeight: 400 }}> VND</span>
         </Typography>
 
         {/* Danh sách tính năng */}
@@ -88,9 +123,24 @@ const SubscriptionCard = ({type}) => {
             Thời gian:
           </Typography>
           <Typography variant="body2" sx={{ ml: "auto", fontWeight: 600 }}>
-            7 ngày
+            { services[type].day } ngày
           </Typography>
         </Box>
+        
+
+        <Divider sx={{ my: 2 }} />
+
+        {/* Thời gian */}
+        <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+          <PriceCheckIcon sx={{ color: "#666", mr: 1, fontSize: 18 }} />
+          <Typography variant="body1" sx={{ color: "#666", fontWeight: 600   }}>
+            Siêu tiết kiệm
+          </Typography>
+          {/* <Typography variant="body2" sx={{ ml: "auto", fontWeight: 600 }}>
+            7 ngày
+          </Typography> */}
+        </Box>
+
 
         {/* Nút thanh toán */}
         <Button
@@ -112,6 +162,8 @@ const SubscriptionCard = ({type}) => {
         >
           Thanh toán ngay
         </Button>
+
+
       </CardContent>
     </Card>
   )

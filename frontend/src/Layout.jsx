@@ -5,7 +5,7 @@ import { useState } from "react";
 import Footer from "./components/Footer";
 
 const ContentWrapper  = styled.div`
-    width:90%;
+    width:80%;
     margin:auto;
 `
 // const Overlay = styled.div`
@@ -31,11 +31,11 @@ export default function RootLayout(){
                     
                         
                         <Outlet />
-                    
+                        
                 </ContentWrapper>
-
-
             <Footer></Footer>
+
+            
         </>
     )
 }

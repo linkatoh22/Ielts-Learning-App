@@ -30,7 +30,7 @@ export default function WebPlan(){
     return(
 
         <Box sx={{
-            width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center"}}>
+            width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center",pb:3}}>
 
             <Box sx={{textAlign:"center",mb: 6}}>
                 <Typography  

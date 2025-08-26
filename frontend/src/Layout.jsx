@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import MainMenu from "./components/Mainmenu";
+import MainMenu from "./components/MainMenu.jsx";
 import { Outlet } from 'react-router-dom';
 import { useState } from "react";
 import Footer from "./components/Footer";

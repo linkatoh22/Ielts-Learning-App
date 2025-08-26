@@ -25,14 +25,14 @@ export default function RootLayout(){
             
             <MainMenu ></MainMenu>
            
-                <ContentWrapper>
+                
                         {/* <Sidebar isVisible={isSidebar} setIsSidebar={setIsSidebar}/>
                         {isSidebar && <Overlay onClick={() => setIsSidebar(false)} />} */}
                     
                         
                         <Outlet />
                         
-                </ContentWrapper>
+              
             <Footer></Footer>
 
             

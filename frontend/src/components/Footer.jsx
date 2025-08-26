@@ -25,7 +25,7 @@ const ImgButton = styled.img`
 `
 export default function Footer() {
   return (
-  <Box sx={{width:"100%",color:"white", backgroundColor:"#1976d2",mt:4,height:"10vh",display:"flex",alignItems:"center", justifyContent:"center"}}>
+  <Box sx={{width:"100%",color:"white", backgroundColor:"#1976d2",height:"10vh",display:"flex",alignItems:"center", justifyContent:"center"}}>
     <Box sx={{p:2, display:"flex",alignItems:"center",justifyContent:"space-between",width:"80%",margin:"auto"}}>
 
       <Box>

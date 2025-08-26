@@ -20,31 +20,34 @@ const signUp = async (req, res,next)=>{
         
         var userAvailable = await User.findOne({email:email});  
         
-        if(userAvailable && userAvailable.verified == true){
+        if(userAvailable ){
             res.status(400);
             throw new Error("Email này đã được đăng ký.");
         }
         
         const hashedPassword = await bcrypt.hash(password,10);
         
-        if(!userAvailable){
+        
             
-            const user = await User.create(
+        const user = await User.create(
                 {
                     fullname,
                     email,
                     password:hashedPassword,
-
-                    role:"customer",
+                    role:"Free user",
                     isGoogleUser:false
                 }
             )
             
-            userAvailable = user;
-        }
-       
         
-        await sendOTPVerificationEmail(userAvailable,res);
+        return res.status(200).json({
+            status:"Success",
+            code:200,
+            message:"Tạo user thành công",
+            data:{
+                user
+            },
+        })
         
     }
     catch (error){

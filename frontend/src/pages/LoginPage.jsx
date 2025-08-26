@@ -6,15 +6,14 @@ import { GoogleSVG } from "../assets/googleSvg";
 import BadgeIcon from '@mui/icons-material/Badge';
 import { useContext, useEffect, useState } from "react";
 
-// import {fetchLogin} from "../../redux/thunk/authThunk";
-// import { useDispatch,useSelector } from "react-redux";
+import { fetchLogin } from "../redux/thunk/authThunk";
+import { useDispatch,useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-// import { AuthContext } from "../../context/authContext";
+import { AuthContext } from "../context/authContext";
 
 
 const GoogleIcon  = styled.div`
-
     display:flex;
     align-items:center;
     justify-content:center;
@@ -23,53 +22,56 @@ const GoogleIcon  = styled.div`
 `
 const BASE_URL = import.meta.env.VITE_BASE_URL_ORG;
 export function LogInPage() {
-    // const {login} = useContext(AuthContext);
-    // const dispatch = useDispatch();
-    var loading = false;
+
+    const {login} = useContext(AuthContext);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
     const [formData, setFormData] = useState({
         email: "",
         password: "",
-      })
+    })
     
-    //   const { loading,error,accessToken } = useSelector(s => s.auth)
+    const { loading,error,accessToken } = useSelector(s => s.auth)
     
-      const handleInputChange = (key,value) => {
+    const handleInputChange = (key,value) => {
         setFormData((prev) => ({
           ...prev,
           [key]:value
         }))
       }
     
-      const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
             event.preventDefault()
-            console.log("formData: ",formData)
-            // if (!formData.email || !formData.password) {
-            //     toast.error("Vui lòng điền đầy đủ thông tin");
-            //     return;
-            // }
+            
 
-            // const response = await dispatch(fetchLogin({
-            //     email: formData.email,
-            //     password: formData.password }));
+            if (!formData.email || !formData.password) {
+                toast.error("Vui lòng điền đầy đủ thông tin");
+                return;
+            }
 
-            // if (response.payload.status === "Success") {
-            //     toast.success("Đăng nhập thành công");
-            //     login(response.payload.token.accessToken,response.payload.user);
-            //     navigate("/");
+            const response = await dispatch(fetchLogin({
+                email: formData.email,
+                password: formData.password }));
 
-            // } else {
-            //     toast.error("Lỗi: " + response?.payload?.message);
-            // }
+            if (response.payload.status === "Success") {
+                toast.success("Đăng nhập thành công");
+                console.log("response.payload.user: ",response.payload.data);
+                login(response.payload.token.accessToken,response.payload.data);
+                navigate("/");
+
+            } else {
+                toast.error("Lỗi: " + response?.payload?.message);
+            }
         
       }
 
-      const handleGoogleLogin = () => {
+    const handleGoogleLogin = () => {
         window.location.href = `${BASE_URL}/api/auth/google`;
       }
 
 
-      useEffect(() => {
+    useEffect(() => {
                   document.body.style.cursor = loading ? "wait" : "default";
                   return () => {
                       document.body.style.cursor = "default";

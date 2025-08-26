@@ -4,14 +4,12 @@ const userSchema = mongoose.Schema({
             type:String
         
         },
-
         email:{
             type:String,
             required:[true,"Please add the email"],
             unique:true,
             match: [/^\S+@\S+\.\S+$/, "Email không hợp lệ"]
         },
-
         password:{
             type:String,
             required:function() {
@@ -38,13 +36,8 @@ const userSchema = mongoose.Schema({
 
         role:{
             type:String,
-            enum:['customer','admin'],
+            enum:['Free user','Paid user','Admin'],
             required:[true,"Vui long them role"]
-        },
-        verified:{
-            type:Boolean,
-            default:false,
-            
         },
         refreshToken:{
 

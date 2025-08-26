@@ -9,7 +9,8 @@ import {
   Paper,
   Menu,
   MenuItem,
-  Button
+  Button,
+  Divider
 } from "@mui/material"
 import Logo from "../assets/logo.png"
 import styled from "styled-components";
@@ -20,15 +21,19 @@ import {
   Menu as MenuIcon
 } from "@mui/icons-material"
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-
-
+import { useContext, useState,useEffect } from "react";
+import LogoutIcon from '@mui/icons-material/Logout';
+import InfoIcon from '@mui/icons-material/Info';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
 import { AuthContext } from "../context/authContext";
+import userPic from "../assets/userPic.jpg";
+import {fetchLogOut} from "../redux/thunk/authThunk"
+import { useSelector,useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const LogoImg = styled.img`
    
@@ -58,8 +63,10 @@ const LogoImg = styled.img`
 
 
 export default function MainMenu() {
-    
+    const { loading,error } = useSelector(s => s.auth)
+    const {fullName,email,accessToken,logout} = useContext(AuthContext);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleMenu = (event) => {
@@ -69,6 +76,43 @@ export default function MainMenu() {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
+    const [anchorElUser, setAnchorElUser] = useState(null);
+
+    const handleMenuUser = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+
+    const handleCloseUser = () => {
+        setAnchorElUser(null);
+    };
+
+    const handleLogOut = async ()=>{
+
+        const response = await dispatch(fetchLogOut());
+        if (response.payload.status === "Success") {
+                
+                toast.success("Đăng xuất thành công!");
+                
+
+        } else {
+           
+            toast.error(`Lỗi: ${response?.payload?.message}`);
+        }
+        logout();
+        navigate(`/dang-nhap`);
+        handleCloseUser();
+    }
+
+
+
+    useEffect(() => {
+        document.body.style.cursor = loading ? "wait" : "default";
+        return () => {
+            document.body.style.cursor = "default";
+        };
+    }, [loading]);
 
 
   return (
@@ -116,7 +160,7 @@ export default function MainMenu() {
                             color="inherit" variant="h6" sx={{fontWeight:"bold"}} 
                             onClick={handleMenu}
                             endIcon={<KeyboardArrowDownIcon></KeyboardArrowDownIcon>}
-                            aria-label="account of current user"
+                            
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                            
@@ -134,32 +178,131 @@ export default function MainMenu() {
                                 open={anchorEl}
                                 onClose={handleClose}
                             >
-                                <MenuItem onClick={handleClose}>
-                                    <ListItemIcon>
+
+                                <Box sx={{p:2,textAlign:"center"}}>
+
+                                        <Typography sx={{fontWeight:"bold",fontStyle:"italic"}}>Luyện thi <span style={{color:"var(--main-blue)"}}>IELTS</span></Typography>
+                                    </Box>
+
+                                <Divider />
+
+
+                                <MenuItem onClick={handleClose} sx={{p:1.2}}>
+                                    <ListItemIcon sx={{color:"var(--success-700)"}} >
                                         <AutoStoriesIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText> Luyện thi Reading </ListItemText>    
+                                    <ListItemText sx={{color:"var(--success-700)"}} > Luyện thi Reading </ListItemText>    
                                     
                                 </MenuItem>
-                                <MenuItem onClick={handleClose}>
-                                    <ListItemIcon>
+                                <MenuItem onClick={handleClose} sx={{p:1.2}}>
+                                    <ListItemIcon sx={{color:"var(--warning-700)"}} >
                                         <HeadphonesIcon fontSize="small" />
                                     </ListItemIcon>
                                     
-                                    <ListItemText> Luyện thi Listening </ListItemText>   
+                                    <ListItemText sx={{color:"var(--warning-700)"}} > Luyện thi Listening </ListItemText>   
                                 </MenuItem>
                             </Menu>
                         </Paper>
 
                     </div>
                     
-                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-ky")}  >
-                        ĐĂNG KÝ
-                    </Button>
 
-                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-nhap")} >
-                        ĐĂNG NHẬP
-                    </Button>
+                    {
+                        accessToken?
+
+                        <div>
+                            <Button 
+                                 color="inherit" variant="h6" sx={{fontWeight:"bold"}}
+                                 aria-controls="menu-user"
+                                aria-haspopup="true"
+                                onClick={handleMenuUser}
+                                endIcon={<KeyboardArrowDownIcon></KeyboardArrowDownIcon>}>
+                                <img 
+                                    src={userPic}
+                                    style={{
+                                        cursor:"pointer",
+                                        backgroundColor:"var(--success-400)",
+                                        width:"35px",
+                                        height:"35px",
+                                        borderRadius:"100%",
+                                        textAlign:"center"}}>
+                                
+                                </img>
+                            </Button>
+
+
+                            <Paper >
+                                <Menu
+                                    id="menu-user"
+                                    anchorEl={anchorElUser}
+                                    keepMounted
+                                    open={anchorElUser}
+                                    onClose={handleCloseUser}
+                                >
+
+                                    <Box sx={{p:2}}>
+
+                                        <Typography sx={{fontWeight:"bold"}}>Chào {fullName} 👋</Typography>
+                                    </Box>
+
+                                    <Divider />
+                                    <MenuItem onClick={handleCloseUser} sx={{p:1.2}}>
+                                        <ListItemIcon sx={{color:"var(--blue-700)"}} >
+                                            <InfoIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        <ListItemText sx={{fontWeight:"bold", color:"var(--blue-700)"}} > Thông tin chung </ListItemText>    
+                                        
+                                    </MenuItem>
+
+                                    <MenuItem onClick={handleCloseUser} sx={{p:1.2}}>
+                                        <ListItemIcon sx={{color:"var(--success-700)"}} >
+                                            <AutoStoriesIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        
+                                        <ListItemText sx={{fontWeight:"bold", color:"var(--success-700)"}} > Lịch sử thi Reading </ListItemText>   
+                                    </MenuItem>
+
+                                    <MenuItem onClick={handleCloseUser} sx={{color:"var(--warning-700)",p:1.2}} >
+                                        <ListItemIcon sx={{color:"var(--warning-700)"}} >
+                                            <HeadphonesIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        
+                                        <ListItemText sx={{fontWeight:"bold"}}> Lịch sử thi Listening </ListItemText>   
+                                    </MenuItem>
+
+
+                                    <Divider />
+
+
+                                    <MenuItem onClick={handleLogOut} sx={{color:"var(--error-700)",p:1.2}}>
+                                        <ListItemIcon sx={{color:"var(--error-700)"}}>
+                                            <LogoutIcon fontSize="small" />
+                                        </ListItemIcon>
+                                        
+                                        <ListItemText sx={{fontWeight:"bold"}} > Đăng xuất </ListItemText>   
+                                    </MenuItem>
+
+
+                                </Menu>
+                            </Paper>
+
+                        </div>
+                        
+                        
+                        :
+
+                        <>
+                            <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-ky")}  >
+                                ĐĂNG KÝ
+                            </Button>
+
+                            <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-nhap")} >
+                                ĐĂNG NHẬP
+                            </Button>
+                        </>
+                
+                    }
+                    
 
 
                

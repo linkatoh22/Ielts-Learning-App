@@ -17,7 +17,7 @@ export default function GoogleSuccessPage(){
         
         if(accessToken){
             toast.success("Đăng nhập thành công")
-            login(accessToken,{username,email})
+            login(accessToken,{fullname:username,email})
             navigate("/")
         }
 

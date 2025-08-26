@@ -35,7 +35,7 @@ export default function MenuTop(){
             width:"100%"
         }}>
             
-            <Box sx={{width:"42%",display:"flex",flexDirection:"column",gap:4}}>
+            <Box sx={{width:"45%",display:"flex",flexDirection:"column",gap:4}}>
                 <Typography variant="h1" sx={{fontWeight:"bold"}}> <span style={{color:"var(--main-blue)", fontStyle:"italic"}}>Luyện thi </span></Typography>
                 <Typography variant="h1" sx={{fontWeight:"bold"}}> dễ dàng hơn!</Typography>
                 <Typography variant="h5" sx={{fontWeight:400,color:"var(--grey-800)"}}>Với Learning Ielts việc ôn thi khả năng Reading và Listening dễ dàng hơn bao giờ hết. Học mọi nơi, dễ như chơi.</Typography>

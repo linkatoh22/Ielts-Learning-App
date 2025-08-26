@@ -30,7 +30,7 @@ export default function WebPlan(){
     return(
 
         <Box sx={{
-            width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center",pb:3}}>
+            width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center",py:3}}>
 
             <Box sx={{textAlign:"center",mb: 6}}>
                 <Typography  
@@ -56,8 +56,9 @@ export default function WebPlan(){
             
            
             <Grid container
-            sx={{p:2}}
+            sx={{ p: 2, alignItems: "stretch" }}
             spacing={2}
+
            
             
             >

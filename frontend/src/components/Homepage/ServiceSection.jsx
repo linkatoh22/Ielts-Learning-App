@@ -73,7 +73,7 @@ const ServicesSection = () => {
       </Box>
 
       {/* Services Grid */}
-      <Grid container spacing={2}>
+      <Grid container spacing={2} sx={{ p: 2, alignItems: "stretch" }}>
         {services.map((service, index) => (
           <Grid item size={{ xs: 6, md: 4 }} key={index}>
             <Card

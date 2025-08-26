@@ -43,7 +43,7 @@ const ServicesSection = () => {
   ]
 
   return (
-    <Box sx={{ width:"100%",display:"flex",flexDirection:"column", height:"60vh", justifyContent:"center"}}>
+    <Box sx={{ width:"100%",display:"flex",flexDirection:"column", height:"70vh", justifyContent:"center"}}>
     
       {/* Header Section */}
       <Box sx={{ mb: 6,textAlign:"center" }}>
@@ -73,12 +73,13 @@ const ServicesSection = () => {
       </Box>
 
       {/* Services Grid */}
-      <Grid container spacing={2} sx={{ p: 2, alignItems: "stretch" }}>
+      <Grid container spacing={2}>
         {services.map((service, index) => (
           <Grid item size={{ xs: 6, md: 4 }} key={index}>
             <Card
               sx={{
                 py:5,
+                flex: 1,
                 px:2,
                 border: "2px solid #e3f2fd",
                 borderRadius: 3,
@@ -90,7 +91,7 @@ const ServicesSection = () => {
                 },
               }}
             >
-              <CardContent sx={{ p: 3, display:"flex", flexDirection:"column", gap:2, justifyContent:"center" }}>
+              <CardContent sx={{ p: 3, display:"flex", flexDirection:"column", gap:1.5, justifyContent:"center" }}>
                 <Typography
                   // variant="h4"
                   component="h2"

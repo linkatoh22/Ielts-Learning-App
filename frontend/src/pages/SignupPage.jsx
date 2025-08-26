@@ -7,10 +7,9 @@ import LockOutlineIcon from '@mui/icons-material/LockOutline';
 import { toast } from "react-toastify";
 import BadgeIcon from '@mui/icons-material/Badge';
 import { useEffect, useState } from "react";
-// import { useSelector,useDispatch } from "react-redux";
-// import { fetchSignUp } from "../../redux/thunk/authThunk";
+import { useSelector,useDispatch } from "react-redux";
+import { fetchSignUp } from "../redux/thunk/authThunk";
 import { useNavigate } from "react-router-dom";
-// import { generateOtpLink } from "../../utils/generateToken";
 const GoogleIcon  = styled.div`
 
     display:flex;
@@ -21,12 +20,11 @@ const GoogleIcon  = styled.div`
 `
 export function SignupPage() {
     const navigate = useNavigate();
-    // const dispatch = useDispatch();
-    var loading = false;
-    // const { loading,error,otpSent,userId } = useSelector(s => s.auth)
+    const dispatch = useDispatch();
+    
+    const { loading,error } = useSelector(s => s.auth)
     
     const [formData, setFormData] = useState({
-        
         fullname: "",
         email: "",
         password: "",
@@ -45,28 +43,27 @@ export function SignupPage() {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        
-        // if(formData.password.trim() != formData.confirmPassword.trim()){
+        console.log("formData: ",formData)
+        if(formData.password.trim() != formData.confirmPassword.trim()){
             
-        //     toast.error("Lỗi: Mật khẩu xác nhận không khớp.")
-        //     return;
-        // }
+            toast.error("Lỗi: Mật khẩu xác nhận không khớp.")
+            return;
+        }
 
       
-        // const response = await dispatch(fetchSignUp(formData));
-        // if (response.payload.status === "Success") {
+        const response = await dispatch(fetchSignUp(formData));
+        if (response.payload.status === "Success") {
 
             
-        //      const newUserId = response.payload.data.userId;
+             const newUserId = response.payload.data.userId;
            
-        //     toast.success("Đăng ký thành công!");
-        //     const tokenOtp = generateOtpLink(newUserId);
-        //     navigate(`/xac-thuc-otp/${tokenOtp}`);
+            toast.success("Đăng ký thành công! Vui lòng đăng nhập...");
+            navigate(`/dang-nhap`);
 
-        // } else {
+        } else {
            
-        //     toast.error(`Lỗi: ${response?.payload?.message}`);
-        // }
+            toast.error(`Lỗi: ${response?.payload?.message}`);
+        }
         
 
         

@@ -28,6 +28,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import HeadphonesIcon from '@mui/icons-material/Headphones';
+import { AuthContext } from "../context/authContext";
+
 const LogoImg = styled.img`
    
     width: 7.5%;
@@ -56,6 +58,8 @@ const LogoImg = styled.img`
 
 
 export default function MainMenu() {
+    
+    const navigate = useNavigate();
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleMenu = (event) => {
@@ -88,8 +92,6 @@ export default function MainMenu() {
                 <Box sx={{ display:"flex",alignItems:"center",flexGrow: 1,gap:2 }}>
                     <LogoImg
                         src={Logo}
-                    
-                       
                     >
                        
                     </LogoImg>
@@ -104,7 +106,7 @@ export default function MainMenu() {
 
 
                 
-                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}}  >
+                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}}  onClick={()=>navigate("/")}>
                         TRANG CHỦ
                     </Button>
                     
@@ -151,11 +153,11 @@ export default function MainMenu() {
 
                     </div>
                     
-                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} >
+                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-ky")}  >
                         ĐĂNG KÝ
                     </Button>
 
-                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} >
+                    <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}} onClick={()=>navigate("/dang-nhap")} >
                         ĐĂNG NHẬP
                     </Button>
 

@@ -6,28 +6,36 @@ import { ToastContainer } from "react-toastify";
 import { ThemeProvider } from "@mui/material/styles";
 import { LogInPage } from "./pages/Loginpage";
 import { SignupPage } from "./pages/SignupPage";
+import { store } from './redux/store'
+import { Provider } from 'react-redux';
+import {AuthProvider} from  "./context/authContext"
+import GoogleSuccessPage from "./pages/GoogleSuccessPage";
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <BrowserRouter>
+    
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <AuthProvider>
+          <BrowserRouter>
 
 
-            <Routes>
-              <Route element={<RootLayout/>}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/dang-nhap" element={<LogInPage />} />
-                  <Route path="/dang-ky" element={<SignupPage />} />
+                <Routes>
+                  <Route element={<RootLayout/>}>
+                      <Route path="/" element={<Home />} />
+                      <Route path="/dang-nhap" element={<LogInPage />} />
+                      <Route path="/dang-ky" element={<SignupPage />} />
 
-              </Route>
-              
-            
-            </Routes>
+                  </Route>
+                     <Route path="/google-success" element={<GoogleSuccessPage />} />
+                
+                </Routes>
 
 
-      </BrowserRouter>
-      <ToastContainer />
-  </ThemeProvider>
-   
+          </BrowserRouter>
+        </AuthProvider>
+        <ToastContainer />
+      </ThemeProvider>
+   </Provider>
   );
 }
 

@@ -52,7 +52,12 @@ const signUp = async (req, res,next)=>{
     }
     catch (error){
         
-        next(error);
+         return res.status(404).json({
+            status:"FAILED",
+            code:404,
+            message:error.message,
+            
+        })
     }
 
     
@@ -106,6 +111,10 @@ const logIn = async (req, res,next)=>{
             message:"Login Successfully",
             status:"Success",
             code:200,
+            data:{
+                email:user.email,
+                fullname: user.fullname
+            },
             token:{
                 accessToken,
                 refreshToken

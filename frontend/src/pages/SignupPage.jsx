@@ -18,6 +18,8 @@ const GoogleIcon  = styled.div`
     cursor: pointer;
   
 `
+
+const BASE_URL = import.meta.env.VITE_BASE_URL_ORG;
 export function SignupPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -69,6 +71,11 @@ export function SignupPage() {
         
       }
     
+    const handleGoogleLogin = () => {
+        window.location.href = `${BASE_URL}/api/auth/google`;
+      }
+
+
     useEffect(() => {
         document.body.style.cursor = loading ? "wait" : "default";
         return () => {

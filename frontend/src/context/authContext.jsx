@@ -4,28 +4,27 @@ export const AuthContext=createContext();
 
 export function AuthProvider ({children}){
     const [accessToken,setAccessToken] = useState(null)
-    const [username,setUsername] = useState("")
+    const [fullName,setFullname] = useState("")
     const [email,setEmail] = useState("")
 
     const login = (token,{fullname,email}) =>{
-        console.log("fullname: ",fullname)
-        console.log("email: ",email)
+        
         setAccessToken(token);
-        setUsername(username)
+        setFullname(fullname)
         setEmail(email)
         
         localStorage.setItem('accessToken',token)
-        localStorage.setItem('username',username)
+        localStorage.setItem('fullName',fullname)
         localStorage.setItem('email',email)
         
     }
 
     const logout = ()=>{
         setAccessToken(null);
-        setUsername(null)
+        setFullname(null)
         setEmail(null)
         localStorage.removeItem('accessToken')
-        localStorage.removeItem('username')
+        localStorage.removeItem('fullName')
         localStorage.removeItem('email')
     }
 
@@ -38,7 +37,7 @@ export function AuthProvider ({children}){
     }, []);
 
     return(
-        <AuthContext.Provider value={{accessToken,username,email,login,logout}}>
+        <AuthContext.Provider value={{accessToken,fullName,email,login,logout}}>
             {children}
         </AuthContext.Provider>
     )

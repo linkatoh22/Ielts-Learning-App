@@ -33,7 +33,7 @@ router.route("/sign-up").post(signUp);
 
 router.route("/log-in").post(logIn);
 
-router.route("/log-out").post(logOut);
+router.route("/log-out").get(logOut);
 
 
 ///OTP

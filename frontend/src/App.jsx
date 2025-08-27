@@ -10,6 +10,7 @@ import { store } from './redux/store'
 import { Provider } from 'react-redux';
 import {AuthProvider} from  "./context/authContext"
 import GoogleSuccessPage from "./pages/GoogleSuccessPage";
+import { ForgetPasswordPage } from "./pages/ForgetPasswordPage";
 function App() {
   return (
     
@@ -24,6 +25,7 @@ function App() {
                       <Route path="/" element={<Home />} />
                       <Route path="/dang-nhap" element={<LogInPage />} />
                       <Route path="/dang-ky" element={<SignupPage />} />
+                      <Route path="/quen-mat-khau" element={<ForgetPasswordPage />} />
 
                   </Route>
                      <Route path="/google-success" element={<GoogleSuccessPage />} />

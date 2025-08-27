@@ -9,7 +9,8 @@ const passport = require("passport");
 
 const {handleAccessToken} = require("../controllers/Authentication/tokenController.js")
 require('../configs/google.js')
-
+ 
+const {sendResetLinkToEmail,changePassword} = require("../controllers/User/changePassword.js")
 //LOG IN AND SIGN UP GOOGLE
 router.get('/google',
     passport.authenticate('google',{
@@ -39,4 +40,8 @@ router.route("/log-out").get(logOut);
 ///OTP
 router.route("/verify-OTP").post(verifyOTP);
 router.route("/resend-OTP").post(resendOTP);
+
+//CHANGE PASSWORD
+router.route("/forget-password/send-link").post(sendResetLinkToEmail);
+router.route("/forget-password/change-password/:token").put(changePassword);
 module.exports = router;

@@ -1,4 +1,4 @@
-const { ReadingTest, PassageReading } = require("../models/readingExamModel");
+const { ReadingTest, PassageReading } = require("../models/readingExamModel.js");
 const ReadingSubmission = require("../models/submissionReadingModel.js");
 
 const submitReadingTest = async (req, res) => {

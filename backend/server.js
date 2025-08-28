@@ -4,7 +4,7 @@ const connectDb = require("./configs/dbConnection")
 const cors = require("cors");
 require('dotenv').config();
 const cookieParser = require("cookie-parser");
-// Middleware
+const errorHandler = require("./middlewares/errorHandler")
 
 connectDb();
 
@@ -26,6 +26,7 @@ app.use("/api/reading-test",require("./routes/readingExamRoutes"))
 app.use("/api/listening-test",require("./routes/listeningExamRoutes"))
 //
 const PORT = 3000;
+app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });

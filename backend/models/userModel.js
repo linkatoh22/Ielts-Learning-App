@@ -36,7 +36,7 @@ const userSchema = mongoose.Schema({
 
         role:{
             type:String,
-            enum:['Free user','Paid user','Admin'],
+            enum:['user','admin'],
             required:[true,"Vui long them role"]
         },
         refreshToken:{

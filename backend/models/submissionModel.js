@@ -7,11 +7,16 @@ const answerSchema = new mongoose.Schema({
   isCorrect:{type:Boolean}
 });
 
-const listeningAttemptSchema = new mongoose.Schema({
+const SubmissionSchema = new mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     
+    examType:{type:String,enum: ["Listening", "Reading"]},
+
     listeningTestId: { type: mongoose.Schema.Types.ObjectId, ref: "ListeningTest" },
     audioId: { type: mongoose.Schema.Types.ObjectId, ref: "AudioListening" },
+
+    readingTestId: { type: mongoose.Schema.Types.ObjectId, ref: "ReadingTest" },
+    passageId: { type: mongoose.Schema.Types.ObjectId, ref: "PassageReading" },
     
     answers: [answerSchema],
         
@@ -19,4 +24,4 @@ const listeningAttemptSchema = new mongoose.Schema({
     submittedAt: { type: Date, default: Date.now }
 });
 
-module.exports = mongoose.model("ListeningSubmission", listeningAttemptSchema);
+module.exports = mongoose.model("Submission", SubmissionSchema);

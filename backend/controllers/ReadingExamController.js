@@ -3,7 +3,13 @@ const { PassageReading } = require("../models/readingExamModel")
 const getAllPassage = async (req,res,next)=>{
     try{
           const tests = await PassageReading.find();
-            res.status(200).json(tests);
+            if(!tests) {res.status(404); throw new Error("No Reading Test Found")};
+          
+            res.status(200).json({
+                    code:200,
+                    status:"SUCCESS",  
+                    exam:tests
+            });
     }
     catch(error){
         console.error(error);
@@ -13,8 +19,15 @@ const getAllPassage = async (req,res,next)=>{
 
 const getAllReadingTest = async (req,res,next)=>{
     try{
-          const tests = await ReadingTest.find().populate("passages");;
-            res.status(200).json(tests);
+          const tests = await ReadingTest.find().populate("passages");
+
+          if(!tests) {res.status(404); throw new Error("No Reading Test Found")};
+
+            res.status(200).json({
+                    code:200,
+                    status:"SUCCESS",  
+                    exam:tests
+            });
     }
     catch(error){
         console.error(error);
@@ -22,6 +35,26 @@ const getAllReadingTest = async (req,res,next)=>{
     }
 }
 
+const getDetailReadingTest = async(req,res,next)=>{
+  try {
+      const { id } = req.params; // readingTest
+
+      const tests = await ReadingTest.find({_id:id}).populate("passages"); // đúng model
+
+      if(!tests) {res.status(404); throw new Error("No Reading Test Found")}
+      res.status(200).json({
+              code:200,
+              status:"SUCCESS",  
+              exam:tests
+      });
+
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Lỗi server" });
+  }
+}
 
 
-module.exports = {getAllReadingTest,getAllPassage};
+
+module.exports = {getAllReadingTest,getAllPassage
+    ,getDetailReadingTest};

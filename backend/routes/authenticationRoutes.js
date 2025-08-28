@@ -26,7 +26,7 @@ router.get(
 )
 
 //RESET REFRESH TOKEN
-router.route("/reset-access-token").post(handleAccessToken)
+router.route("/handle-access-token").get(handleAccessToken)
 
 
 //LOGIN AND SIGN UP NORMAL

@@ -24,47 +24,48 @@ const submitReadingTest = async (req, res) => {
 
     // Gom hết question có đáp án
     const allQuestions = [
-      ...passage.questionsPartOne?.questionMultipleChoice || [],
-      ...passage.questionsPartOne?.questionTFN || [],
-      ...passage.questionsPartOne?.questionYNN || [],
-      ...passage.questionsPartOne?.questionMatching || [],
-      ...passage.questionsPartOne?.questionCompletePassage || [],
-
-      ...passage.questionsPartTwo?.questionMultipleChoice || [],
-      ...passage.questionsPartTwo?.questionTFN || [],
-      ...passage.questionsPartTwo?.questionYNN || [],
-      ...passage.questionsPartTwo?.questionMatching || [],
-      ...passage.questionsPartTwo?.questionCompletePassage || [],
-
-      ...passage.questionsPartThree?.questionMultipleChoice || [],
-      ...passage.questionsPartThree?.questionTFN || [],
-      ...passage.questionsPartThree?.questionYNN || [],
-      ...passage.questionsPartThree?.questionMatching || [],
-      ...passage.questionsPartThree?.questionCompletePassage || [],
+      ...passage.questionsPartOne?.questionDetail || [],
+      ...passage.questionsPartTwo?.questionDetail || [],
+      ...passage.questionsPartThree?.questionDetail || []
     ];
+
     
     // Tạo map questionId -> answer đúng
-    const correctAnswers = {};
-    allQuestions.forEach(q => {
-      correctAnswers[q._id.toString()] = q.answer;
-    });
+    const userAnswers = {};
+      answers.forEach(q => {
+        userAnswers[q.questionId.toString()] = q.answer;
+      }
+    );
 
-    console.log("correctAnswers: ", correctAnswers)
+   
     // Chấm điểm
+    let userAnswer = [];
     let score = 0;
-    answers.forEach(ans => {
-      const correct = correctAnswers[ans.questionId];
+
+    allQuestions.forEach(ques => {
+      const userAns = userAnswers[ques._id];
       
-      if (correct && correct.toLowerCase().trim() === ans.answer.toLowerCase().trim()) {
+        if (userAns && userAns?.toLowerCase().trim() === ques?.answer?.toLowerCase().trim()) {
         score++;
       }
+      
+
+      const temp ={
+          answer:userAns??null,
+          correctAnswer: ques.answer.toLowerCase().trim(),
+          questionId:ques._id,
+          isCorrect: userAns?.toLowerCase().trim() === ques?.answer?.toLowerCase().trim()?? false
+      }
+      userAnswer.push(temp)
+
     });
 
-    // Lưu kết quả
+    // // Lưu kết quả
     const submission = new ReadingSubmission({
       userId,
       readingTestId: id,
-      answers,
+      passageId:passage._id,
+      answers:userAnswer,
       score
     });
 
@@ -89,7 +90,7 @@ const submitListeningTest = async (req, res) => {
     
     const { id } = req.params; // readingTestId
     const { userId, answers } = req.body; 
-    const listeningTest = await ListeningTest.findById(id).populate("passages");
+    const listeningTest = await ListeningTest.findById(id).populate("audio");
 
 
     if (!listeningTest) {
@@ -111,40 +112,68 @@ const submitListeningTest = async (req, res) => {
     //   ...audio.questionsPart?.questionCS || [],
     // ];
     
-    const allQuestions = () => {
-      return audio.questionsPart
-        .map((item) => [
-          ...(item.questionCP || []),
-          ...(item.questionCA || []),
-          ...(item.questionCS || []),
-        ])
-        .flat();
-    };
-    // Tạo map questionId -> answer đúng
-    const correctAnswers = {};
-    allQuestions.forEach(q => {
-      correctAnswers[q._id.toString()] = q.answer;
-    });
+    const allQuestions = audio.questionsPart
+      .map((item) => [
+        ...(item.questionDetail || [])
+      ])
+      .flat();
 
     
-    // Chấm điểm
-    let score = 0;
-    answers.forEach(ans => {
-      const correct = correctAnswers[ans.questionId];
+    // // Tạo map questionId -> answer đúng
+    // const correctAnswers = {};
+    // allQuestions.forEach(q => {
+    //   correctAnswers[q._id.toString()] = q.answer;
+    // });
+    // // Chấm điểm
+    // let score = 0;
+    // answers.forEach(ans => {
+    //   const correct = correctAnswers[ans.questionId];
       
-      if (correct && correct.toLowerCase().trim() === ans.answer.toLowerCase().trim()) {
+    //   if (correct && correct.toLowerCase().trim() === ans.answer.toLowerCase().trim()) {
+    //     score++;
+    //   }
+    //   ans.correctAnswers = correct.toLowerCase().trim();
+      
+    // });
+
+    const userAnswers = {};
+      answers.forEach(q => {
+        userAnswers[q.questionId.toString()] = q.answer;
+      }
+    );
+
+
+    let userAnswer = [];
+    let score = 0;
+
+    allQuestions.forEach(ques => {
+      const userAns = userAnswers[ques._id];
+      
+        if (userAns && userAns?.toLowerCase().trim() === ques?.answer?.toLowerCase().trim()) {
         score++;
       }
-    });
+      
 
+      const temp ={
+          answer:userAns??null,
+          correctAnswer: ques.answer.toLowerCase().trim(),
+          questionId:ques._id,
+          isCorrect: userAns?.toLowerCase().trim() === ques?.answer?.toLowerCase().trim()?? false
+      }
+      userAnswer.push(temp)
+
+    });
+    
     // Lưu kết quả
     const submission = new ListeningSubmission({
       userId,
       listeningTestId: id,
-      answers,
+      audioId:audio._id,
+      answers:userAnswer,
       score
     });
 
+    
     await submission.save();
 
     res.status(200).json({

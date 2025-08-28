@@ -32,6 +32,14 @@ const MatchingCompletePassage= new mongoose.Schema({ //Complete Passage
     answer: { type: String }
 }) 
 
+
+const questionDetailSchema= new mongoose.Schema({ //MULTIPLE CHOICE
+    qid: { type: String, default: uuidv4 }, 
+    questionText:{ type: String },
+    optionText:[{ type: String}],
+    answer: { type: String}
+}) 
+
 const questionSchema = new mongoose.Schema({
   type: { 
     type: String, 
@@ -51,13 +59,13 @@ const questionSchema = new mongoose.Schema({
     questionPassage : {type:String},
 
     questionMatchOption:[{ type: String }], //Matching
+    questionDetail:[questionDetailSchema],
+    // questionTFN : [TFNQuestionSchema],
+    // questionYNN : [YNNQuestionSchema],
+    // questionMatching : [MatchingQuestionMatching],
+    // questionMultipleChoice : [MCQuestionMatching],
 
-    questionTFN : [TFNQuestionSchema],
-    questionYNN : [YNNQuestionSchema],
-    questionMatching : [MatchingQuestionMatching],
-    questionMultipleChoice : [MCQuestionMatching],
-
-    questionCompletePassage : [MatchingCompletePassage],
+    // questionCompletePassage : [MatchingCompletePassage],
 
 
     // detail: { type: mongoose.Schema.Types.Mixed, required: true } // chứa dữ liệu theo type

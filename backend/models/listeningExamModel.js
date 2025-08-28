@@ -23,6 +23,14 @@ const ChooseAnswer= new mongoose.Schema({ //MULTIPLE CHOICE
 }) 
 
 
+const questionDetailSchema= new mongoose.Schema({ //MULTIPLE CHOICE
+    qid: { type: String, default: uuidv4 }, 
+    questionText:{ type: String},
+    optionText:[{ type: String}],
+    answer: { type: String},
+    CompleteSentences:{ type: String}
+}) 
+
 
 const questionSchema = new mongoose.Schema({
   type: { 
@@ -44,10 +52,10 @@ const questionSchema = new mongoose.Schema({
     questionMatchOption:[{ type: String }], //Matching
 
     questionTextMA :[{ type: String, required: true }], ///Matching Answer
-
-    questionCP: [CompletePassage],
-    questionCA : [ChooseAnswer],
-    questionCS : [CompleteSentences],
+    questionDetail:[questionDetailSchema],
+    // questionCP: [CompletePassage],
+    // questionCA : [ChooseAnswer],
+    // questionCS : [CompleteSentences],
 
     
 
@@ -61,7 +69,7 @@ const audioSchema = new mongoose.Schema({
 
 const listeningTestSchema = new mongoose.Schema({
   name: { type: String, required: true }, 
-  audio: { type: mongoose.Schema.Types.ObjectId, ref: "audioListening" },
+  audio: { type: mongoose.Schema.Types.ObjectId, ref: "AudioListening" },
   createdAt: { type: Date, default: Date.now }
 });
 

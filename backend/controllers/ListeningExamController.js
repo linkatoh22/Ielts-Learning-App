@@ -3,7 +3,7 @@ const { ListeningTest, audioListening } = require("../models/listeningExamModel"
 const getAllAudio= async (req,res,next)=>{
     try{
         console.log("GET ALL AUDIO")
-          const tests = await ListeningTest.find();
+          const tests = await audioListening.find();
             res.status(200).json(tests);
     }
     catch(error){

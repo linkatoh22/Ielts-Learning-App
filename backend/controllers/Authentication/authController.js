@@ -52,12 +52,7 @@ const signUp = async (req, res,next)=>{
     }
     catch (error){
         
-         return res.status(404).json({
-            status:"FAILED",
-            code:404,
-            message:error.message,
-            
-        })
+         next(error);
     }
 
     
@@ -125,12 +120,7 @@ const logIn = async (req, res,next)=>{
 
     }
     catch(error){
-        return res.status(404).json({
-            status:"FAILED",
-            code:404,
-            message:error.message,
-            
-        })
+         next(error);
     }
 }
 

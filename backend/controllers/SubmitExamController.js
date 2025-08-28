@@ -1,16 +1,14 @@
 const { ReadingTest, PassageReading } = require("../models/readingExamModel.js");
-const ReadingSubmission = require("../models/submissionReadingModel.js");
-const ListeningSubmission  = require("../models/submissionListeningModel.js")
 const {ListeningTest, audioListening } = require("../models/listeningExamModel.js")
-
+const Submission = require("../models/submissionModel.js")
 
 const submitReadingTest = async (req, res) => {
   try {
     
     const { id } = req.params; // readingTestId
-    const { userId, answers } = req.body; 
+    const { answers } = req.body; 
     const readingTest = await ReadingTest.findById(id).populate("passages");
-
+    let userId = req.user._id;
 
     if (!readingTest) {
       return res.status(404).json({ message: "Reading test not found" });
@@ -61,7 +59,8 @@ const submitReadingTest = async (req, res) => {
     });
 
     // // Lưu kết quả
-    const submission = new ReadingSubmission({
+    const submission = new Submission({
+      examType:"Reading",
       userId,
       readingTestId: id,
       passageId:passage._id,
@@ -73,9 +72,11 @@ const submitReadingTest = async (req, res) => {
 
     res.status(200).json({
       message: "Submitted successfully",
-      score,
-      total: allQuestions.length,
-      submission
+      submitDetail:{
+        score,
+        total: allQuestions.length,
+        submission
+      }
     });
 
   } catch (error) {
@@ -89,9 +90,9 @@ const submitListeningTest = async (req, res) => {
   try {
     
     const { id } = req.params; // readingTestId
-    const { userId, answers } = req.body; 
+    const { answers } = req.body; 
     const listeningTest = await ListeningTest.findById(id).populate("audio");
-
+    let userId = req.user._id;
 
     if (!listeningTest) {
       return res.status(404).json({ message: "Listening test not found" });
@@ -104,37 +105,12 @@ const submitListeningTest = async (req, res) => {
     }
 
     
-    // Gom hết question có đáp án
-
-    // const allQuestions = [
-    //   ...audio.questionsPart?.questionCP || [],
-    //   ...audio.questionsPart?.questionCA || [],
-    //   ...audio.questionsPart?.questionCS || [],
-    // ];
-    
     const allQuestions = audio.questionsPart
       .map((item) => [
         ...(item.questionDetail || [])
       ])
       .flat();
 
-    
-    // // Tạo map questionId -> answer đúng
-    // const correctAnswers = {};
-    // allQuestions.forEach(q => {
-    //   correctAnswers[q._id.toString()] = q.answer;
-    // });
-    // // Chấm điểm
-    // let score = 0;
-    // answers.forEach(ans => {
-    //   const correct = correctAnswers[ans.questionId];
-      
-    //   if (correct && correct.toLowerCase().trim() === ans.answer.toLowerCase().trim()) {
-    //     score++;
-    //   }
-    //   ans.correctAnswers = correct.toLowerCase().trim();
-      
-    // });
 
     const userAnswers = {};
       answers.forEach(q => {
@@ -165,7 +141,8 @@ const submitListeningTest = async (req, res) => {
     });
     
     // Lưu kết quả
-    const submission = new ListeningSubmission({
+    const submission = new Submission({
+      examType:"Listening",
       userId,
       listeningTestId: id,
       audioId:audio._id,
@@ -178,9 +155,11 @@ const submitListeningTest = async (req, res) => {
 
     res.status(200).json({
       message: "Submitted successfully",
-      score,
-      total: allQuestions.length,
-      submission
+      submitDetail:{
+        score,
+        total: allQuestions.length,
+        submission
+      }
     });
 
   } catch (error) {
@@ -189,4 +168,80 @@ const submitListeningTest = async (req, res) => {
   }
 };
 
-module.exports = { submitReadingTest,submitListeningTest };
+
+const getAllSubmittedListeningTest = async (req, res, next) => {
+  try {
+    let userId = req.user._id;
+    const ListeningTest = await Submission.find({userId:userId,examType:"Listening"})
+    if(!ListeningTest) {res.status(404); throw new Error("No Listening Test Found")}
+    res.status(200).json({
+      message: "Submitted successfully",
+      exam:ListeningTest
+    });
+
+  } catch (error) {
+    next(error)
+  }
+};
+
+const getAllSubmittedReadingTest = async (req, res,next) => {
+  try {
+    const userId = req.user._id;
+    console.log("userId: ", userId)
+    const ReadingTest = await Submission.find({userId:userId,examType:"Reading"})
+    if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
+    res.status(200).json({
+      code:200,
+        status:"SUCCESS",
+      message: "Submitted successfully",
+      exam:ReadingTest,
+      
+      
+    });
+
+  } catch (error) {
+    next(error)
+  }
+};
+
+
+
+
+const getDetailSubmittedListeningTest = async(req,res,next)=>{
+  try{
+      
+      const { id } = req.params; // readingTest
+      const ListeningTest = await Submission.findOne({_id:id})
+      if(!ListeningTest) {res.status(404); throw new Error("No Listening Test Found")}
+      res.status(200).json({
+        code:200,
+        status:"SUCCESS",
+        message: "Submitted successfully",
+        exam:ListeningTest
+    });
+  }
+  catch(error){
+      next(error)
+  }
+}
+
+const getDetailSubmittedReadingTest = async(req,res,next)=>{
+  try{
+      
+      const { id } = req.params; // readingTest
+   
+      const ReadingTest = await Submission.findOne({_id:id})
+      if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
+      res.status(200).json({
+        code:200,
+        status:"SUCCESS",
+        message: "Get test successfully",
+        exam:ReadingTest
+    });
+  }
+  catch(error){
+      next(error)
+  }
+}
+module.exports = { submitReadingTest,submitListeningTest,
+  getAllSubmittedListeningTest,getAllSubmittedReadingTest,getDetailSubmittedListeningTest,getDetailSubmittedReadingTest };

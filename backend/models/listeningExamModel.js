@@ -63,7 +63,7 @@ const questionSchema = new mongoose.Schema({
     // detail: { type: mongoose.Schema.Types.Mixed, required: true } // chứa dữ liệu theo type
 });
 
-const passageSchema = new mongoose.Schema({
+const audioSchema = new mongoose.Schema({
   title: { type: String, required: true },
   content: { type: String, required: true },
   questionsPartOne: questionSchema,
@@ -71,13 +71,13 @@ const passageSchema = new mongoose.Schema({
   questionsPartThree: questionSchema
 });
 
-const readingTestSchema = new mongoose.Schema({
+const listeningTestSchema = new mongoose.Schema({
   name: { type: String, required: true }, 
-  passages: { type: mongoose.Schema.Types.ObjectId, ref: "PassageReading" },
+  audio: { type: mongoose.Schema.Types.ObjectId, ref: "audioSchema" },
   createdAt: { type: Date, default: Date.now }
 });
 
-const ReadingTest = mongoose.model("ReadingTest", readingTestSchema);
-const PassageReading = mongoose.model("PassageReading", passageSchema);
+const ListeningTest = mongoose.model("ListeningTest", listeningTestSchema);
+const audioListening = mongoose.model("audioListening", audioSchema);
 
-module.exports = { ReadingTest, PassageReading };
+module.exports = { ListeningTest, audioListening };

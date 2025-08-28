@@ -1,7 +1,7 @@
 const express=  require("express");
 const router= express.Router();
 const {getAllReadingTest,getAllPassage} = require("../controllers/ReadingExamController")
-const {submitReadingTest} = require("../controllers/SubmitReadingExamController")
+const {submitReadingTest} = require("../controllers/SubmitExamController")
 
 router.route("/get-all-passage").get(getAllPassage);
 router.route("/get-all-test").get(getAllReadingTest);

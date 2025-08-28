@@ -65,7 +65,7 @@ const audioSchema = new mongoose.Schema({
 
 const listeningTestSchema = new mongoose.Schema({
   name: { type: String, required: true }, 
-  audio: { type: mongoose.Schema.Types.ObjectId, ref: "audioSchema" },
+  audio: { type: mongoose.Schema.Types.ObjectId, ref: "audioListening" },
   createdAt: { type: Date, default: Date.now }
 });
 

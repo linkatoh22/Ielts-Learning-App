@@ -22,10 +22,7 @@ const ChooseAnswer= new mongoose.Schema({ //MULTIPLE CHOICE
     answer: { type: String, enum: ["A", "B", "C","D"] }
 }) 
 
-const MarkAnswer= new mongoose.Schema({ //CHOOSE ANSWER
-    qid: { type: String, default: uuidv4 }, 
-    answer:[ { type: String }]
-}) 
+
 
 const questionSchema = new mongoose.Schema({
   type: { 
@@ -35,8 +32,7 @@ const questionSchema = new mongoose.Schema({
       "Complete Passage", //Hinh anh optional
       "Choose Answer",
       "Complete Sentences", //Hinh anh optional
-      "Complete Sentences Table", //Hinh anh optional
-      "Mark Answer"
+      
     ],
     required: true
   },
@@ -53,7 +49,7 @@ const questionSchema = new mongoose.Schema({
     questionCA : [ChooseAnswer],
     questionCS : [CompleteSentences],
 
-    questionMA : [MarkAnswer],
+    
 
 });
 
@@ -70,6 +66,6 @@ const listeningTestSchema = new mongoose.Schema({
 });
 
 const ListeningTest = mongoose.model("ListeningTest", listeningTestSchema);
-const audioListening = mongoose.model("audioListening", audioSchema);
+const audioListening = mongoose.model("AudioListening", audioSchema);
 
 module.exports = { ListeningTest, audioListening };

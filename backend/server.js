@@ -22,7 +22,7 @@ app.use(cookieParser());
 //ROUTES
 
 app.use("/api/auth",require("./routes/authenticationRoutes"));
-
+app.use("/api/reading-test",require("./routes/readingExamRoutes"))
 //
 const PORT = 3000;
 app.listen(PORT, () => {

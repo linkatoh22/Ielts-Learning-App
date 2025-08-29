@@ -8,12 +8,13 @@ const checkRefreshToken = async(id)=>{
 const AuthMiddleware = async (req,res,next)=>{
 
     try{
+        
         const authHeader = req.headers['authorization'];
         
         const token = authHeader && authHeader.split(' ')[1];
         
         if(!token){
-            res.status(404)
+            res.status(401)
             throw Error("Access token missing or invalid");
         }
         jwt.verify(token,process.env.ACCESS_TOKEN_KEY,async (err,decoded)=>{

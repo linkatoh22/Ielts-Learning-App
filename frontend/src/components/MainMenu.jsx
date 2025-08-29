@@ -114,8 +114,14 @@ export default function MainMenu() {
         };
     }, [loading]);
 
+    const handleTest = (type)=>{
+            if(!accessToken) toast.warning("Vui lòng đăng nhập. Để luyện thi.")
+            handleClose();
+            navigate(`/${type}/luyen-thi`);
 
-  return (
+    }
+
+    return (
     
     <Box 
         
@@ -187,14 +193,14 @@ export default function MainMenu() {
                                 <Divider />
 
 
-                                <MenuItem onClick={handleClose} sx={{p:1.2}}>
+                                <MenuItem onClick={()=>handleTest("reading")} sx={{p:1.2}}>
                                     <ListItemIcon sx={{color:"var(--success-700)"}} >
                                         <AutoStoriesIcon fontSize="small" />
                                     </ListItemIcon>
                                     <ListItemText sx={{color:"var(--success-700)"}} > Luyện thi Reading </ListItemText>    
                                     
                                 </MenuItem>
-                                <MenuItem onClick={handleClose} sx={{p:1.2}}>
+                                <MenuItem onClick={()=>handleTest("listening")} sx={{p:1.2}}>
                                     <ListItemIcon sx={{color:"var(--warning-700)"}} >
                                         <HeadphonesIcon fontSize="small" />
                                     </ListItemIcon>

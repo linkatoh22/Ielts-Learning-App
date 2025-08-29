@@ -20,7 +20,8 @@ export const fetchGetAllTest = createAsyncThunk(
     async(payload,{rejectWithValue })=>{
         try{
             const response = await ReadingApi.fetchGetAllTest(payload);
-            return response.data
+            
+            return response.data;
         }
         catch(error){
             return rejectWithValue (error.response?.data || error.message);
@@ -28,12 +29,15 @@ export const fetchGetAllTest = createAsyncThunk(
     }
 
 )
-// SUBMIT TEST
-export const fetchSubmitListeningExam = createAsyncThunk(
-    "reading/fetchSubmitListeningExam",
+
+//LẤY DETAIL BÀI TEST (THƯỜNG DÙNG ĐỂ FETCH ĐỀ)
+export const fetchGetDetailTest = createAsyncThunk(
+    "reading/fetchGetDetailTest",
     async(payload,{rejectWithValue })=>{
         try{
-            const response = await ReadingApi.fetchSubmitListeningExam(payload);
+            
+            const response = await ReadingApi.fetchGetDetailTest(payload);
+            
             return response.data
         }
         catch(error){
@@ -43,7 +47,23 @@ export const fetchSubmitListeningExam = createAsyncThunk(
 
 )
 
-// Lấy hết test đã submit của 1 user
+
+// SUBMIT: SUBMIT TEST
+export const fetchSubmitExam = createAsyncThunk(
+    "reading/fetchSubmitExam",
+    async(payload,{rejectWithValue })=>{
+        try{
+            const response = await ReadingApi.fetchSubmitExam(payload);
+            return response.data
+        }
+        catch(error){
+            return rejectWithValue (error.response?.data || error.message);
+        }
+    }
+
+)
+
+// SUBMIT: Lấy hết test đã submit của 1 user
 export const fetchGetAllSubmitTest = createAsyncThunk(
     "reading/fetchGetAllSubmitTest",
     async(payload,{rejectWithValue })=>{
@@ -57,26 +77,12 @@ export const fetchGetAllSubmitTest = createAsyncThunk(
     }
 
 )
-//LẤY DETAIL BÀI TEST ĐÃ SUBMIT
+//SUBMIT: LẤY DETAIL BÀI TEST ĐÃ SUBMIT
 export const fetchGetDetailSubmitTest = createAsyncThunk(
     "reading/fetchGetDetailSubmitTest",
     async(payload,{rejectWithValue })=>{
         try{
             const response = await ReadingApi.fetchGetDetailSubmitTest(payload);
-            return response.data
-        }
-        catch(error){
-            return rejectWithValue (error.response?.data || error.message);
-        }
-    }
-
-)
-//LẤY DETAIL BÀI TEST (THƯỜNG DÙNG ĐỂ FETCH ĐỀ)
-export const fetchGetDetailTest = createAsyncThunk(
-    "reading/fetchGetDetailTest",
-    async(payload,{rejectWithValue })=>{
-        try{
-            const response = await ReadingApi.fetchGetDetailTest(payload);
             return response.data
         }
         catch(error){

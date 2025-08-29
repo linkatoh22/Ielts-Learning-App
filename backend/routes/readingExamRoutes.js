@@ -7,9 +7,9 @@ const {submitReadingTest,getAllSubmittedReadingTest,getDetailSubmittedReadingTes
 
 const {AuthMiddleware} = require("../middlewares/authMiddlewares");
 router.route("/get-all-passage").get(getAllPassage);
-router.route("/get-all-test").get(getAllReadingTest);
+router.route("/get-all-test").get(AuthMiddleware,getAllReadingTest);
 
-router.route("/submit-test/:id").post(AuthMiddleware,submitReadingTest);
+router.route("/submit/submit-test/:id").post(AuthMiddleware,submitReadingTest);
 
 router.route("/submit/get-all-submit-test").get(AuthMiddleware,getAllSubmittedReadingTest);
 router.route("/submit/get-detail-submit-test/:id").get(AuthMiddleware,getDetailSubmittedReadingTest);

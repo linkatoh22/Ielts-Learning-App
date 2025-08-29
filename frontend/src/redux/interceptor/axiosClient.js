@@ -32,7 +32,7 @@ axiosClient.interceptors.response.use(
             error.response.status === 401 &&
             !originalRequest._retry
         ){
-            
+            console.log("HERE")
             originalRequest._retry = true;
             await resetAccessToken();
 

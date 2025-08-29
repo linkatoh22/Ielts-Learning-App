@@ -25,25 +25,27 @@ const ImgButton = styled.img`
 `
 export default function Footer() {
   return (
-  <Box sx={{width:"100%",color:"white", backgroundColor:"#1976d2",height:"10vh",display:"flex",alignItems:"center", justifyContent:"center"}}>
-    <Box sx={{p:2, display:"flex",alignItems:"center",justifyContent:"space-between",width:"80%",margin:"auto"}}>
+  
+    <Box sx={{width:"100%",color:"white", backgroundColor:"#1976d2",height:"10.5vh",display:"flex",alignItems:"center", justifyContent:"center"}}>
+      <Box sx={{p:2, display:"flex",alignItems:"center",justifyContent:"space-between",width:"80%",margin:"auto"}}>
 
-      <Box>
-        <Typography> © 2025 Learning IELTS. All rights reserved. Ho Chi Minh City</Typography>
+        <Box>
+          <Typography> © 2025 Learning IELTS. All rights reserved. Ho Chi Minh City</Typography>
+        </Box>
+
+        <Box sx={{display:"flex", gap:3, alignItems:"center"}}>
+          <Typography sx={{fontWeight:"bold"}}> Liên hệ:</Typography>
+
+          <ImgButton src={facebook} ></ImgButton>
+          <ImgButton src={zalo}></ImgButton>
+          <ImgButton src={messenger}></ImgButton>
+        </Box>
+
+
+      
+
       </Box>
-
-      <Box sx={{display:"flex", gap:3, alignItems:"center"}}>
-        <Typography sx={{fontWeight:"bold"}}> Liên hệ:</Typography>
-
-        <ImgButton src={facebook} ></ImgButton>
-        <ImgButton src={zalo}></ImgButton>
-        <ImgButton src={messenger}></ImgButton>
-      </Box>
-
-
-    
-
     </Box>
-  </Box>
+
   )
 }

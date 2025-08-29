@@ -33,7 +33,7 @@ export default function RootLayout(){
                         <Outlet />
                         
               
-            <Footer></Footer>
+            {/* <Footer></Footer> */}
 
             
         </>

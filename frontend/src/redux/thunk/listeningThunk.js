@@ -29,11 +29,11 @@ export const fetchGetAllTest = createAsyncThunk(
 
 )
 // SUBMIT TEST
-export const fetchSubmitListeningExam = createAsyncThunk(
-    "listening/fetchSubmitListeningExam",
+export const fetchSubmitExam = createAsyncThunk(
+    "listening/fetchSubmitExam",
     async(payload,{rejectWithValue })=>{
         try{
-            const response = await ListeningApi.fetchSubmitListeningExam(payload);
+            const response = await ListeningApi.fetchSubmitExam(payload);
             return response.data
         }
         catch(error){
@@ -57,7 +57,7 @@ export const fetchGetAllSubmitTest = createAsyncThunk(
     }
 
 )
-//LẤY DETAIL BÀI TEST ĐÃ SUBMIT
+//SUBMIT: LẤY DETAIL BÀI TEST ĐÃ SUBMIT
 export const fetchGetDetailSubmitTest = createAsyncThunk(
     "listening/fetchGetDetailSubmitTest",
     async(payload,{rejectWithValue })=>{
@@ -76,7 +76,9 @@ export const fetchGetDetailTest = createAsyncThunk(
     "listening/fetchGetDetailTest",
     async(payload,{rejectWithValue })=>{
         try{
+            console.log("HERE");
             const response = await ListeningApi.fetchGetDetailTest(payload);
+           
             return response.data
         }
         catch(error){

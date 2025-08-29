@@ -4,6 +4,7 @@ const {generateAccessToken} = require("../../utils/TokenFunc")
 
 const handleAccessToken = async (req,res,next) =>{
     try{
+
         const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
         console.log("handleAccessToken: ", fullUrl);
         
@@ -13,9 +14,6 @@ const handleAccessToken = async (req,res,next) =>{
             res.status(404)
             throw Error("Không tìm thấy Refresh Token.")
         }
-
-        // const decoded = jwt.verify(refreshToken,process.env.REFRESH_TOKEN_KEY);
-        // console.log("decoded:",decoded)
         const user = await User.findOne({refreshToken:refreshToken});
         
         

@@ -3,7 +3,7 @@ const getAllAudio= async (req,res,next)=>{
     try{
         
           const tests = await audioListening.find();
-            res.status(200).json({
+            return res.status(200).json({
               code:200,
               status:"SUCCESS",
               message:"Get Audio successfully",  
@@ -18,7 +18,7 @@ const getAllAudio= async (req,res,next)=>{
 const getAllListeningTest = async (req, res, next) => {
   try {
     const tests = await ListeningTest.find().populate("audio"); // đúng model
-    res.status(200).json({
+     return  res.status(200).json({
               code:200,
               status:"SUCCESS",
               message:"Get Listening test successfully",  
@@ -31,16 +31,19 @@ const getAllListeningTest = async (req, res, next) => {
 
 const getDetailListeningTest = async(req,res,next)=>{
   try {
+      
       const { id } = req.params; // listeningTest
 
-      const tests = await ListeningTest.find({_id:id}).populate("audio"); // đúng model
+      const tests = await ListeningTest.findOne({_id:id}).populate("audio"); // đúng model
       if(!tests) {res.status(404); throw new Error("No Listening Test Found")}
-      res.status(200).json({
+      
+      return res.status(200).json({
               code:200,
               status:"SUCCESS",
               message:"Get Listening test successfully",
               exam:tests
       });
+
   } catch (error) {
       next(error);
       

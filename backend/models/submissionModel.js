@@ -21,6 +21,7 @@ const SubmissionSchema = new mongoose.Schema({
     answers: [answerSchema],
         
     score:{type:Number},
+    questionlength:{type:Number},
     submittedAt: { type: Date, default: Date.now }
 });
 

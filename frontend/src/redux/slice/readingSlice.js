@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import {fetchGetAllPassage,fetchGetAllSubmitTest,fetchGetAllTest,fetchGetDetailSubmitTest,fetchGetDetailTest,fetchSubmitListeningExam } from "../thunk/readingThunk"
+import {fetchGetAllPassage,fetchGetAllSubmitTest,fetchGetAllTest,fetchGetDetailSubmitTest,fetchGetDetailTest,fetchSubmitExam } from "../thunk/readingThunk"
 
 const initialState = {
     loading:false,
@@ -23,27 +23,27 @@ const listeningSlice = createSlice({
             })
             .addCase(fetchGetAllTest.fulfilled, (state, action) => {
                 state.loading = false;
-                state.exam = action.payload.data.exam;
-                
+                state.exam = action.payload.exam;
+
                 state.error = null;
             })
             .addCase(fetchGetAllTest.rejected, (state, action) => {
                 state.loading = false;
-                // state.error = action.payload || "Gửi token thất bại";
+                
             
             })
 
             // SUBMIT TEST
-            .addCase(fetchSubmitListeningExam.pending,(state)=>{
+            .addCase(fetchSubmitExam.pending,(state)=>{
                 state.loading = true;
                 state.error = null;
             })
-            .addCase(fetchSubmitListeningExam.fulfilled, (state, action) => {
+            .addCase(fetchSubmitExam.fulfilled, (state, action) => {
                 state.loading = false;
-                state.submitDetail = action.payload.data.submitDetail;
+                // state.submitDetail = action.payload.data.submitDetail;
                 state.error = null;
             })
-            .addCase(fetchSubmitListeningExam.rejected, (state, action) => {
+            .addCase(fetchSubmitExam.rejected, (state, action) => {
                 state.loading = false;
                 // state.error = action.payload || "Gửi token thất bại";
             
@@ -72,7 +72,7 @@ const listeningSlice = createSlice({
             })
             .addCase(fetchGetDetailSubmitTest.fulfilled, (state, action) => {
                 state.loading = false;
-                state.examDetail = action.payload.data.exam;
+                state.examDetail = action.payload.exam;
                 state.error = null;
             })
             .addCase(fetchGetDetailSubmitTest.rejected, (state, action) => {
@@ -87,7 +87,7 @@ const listeningSlice = createSlice({
             })
             .addCase(fetchGetDetailTest.fulfilled, (state, action) => {
                 state.loading = false;
-                state.examDetail = action.payload.data.exam;
+                state.examDetail = action.payload.exam;
                 state.error = null;
             })
             .addCase(fetchGetDetailTest.rejected, (state, action) => {

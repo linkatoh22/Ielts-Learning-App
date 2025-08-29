@@ -68,7 +68,7 @@ const audioSchema = new mongoose.Schema({
 });
 
 const listeningTestSchema = new mongoose.Schema({
-  name: { type: String, required: true }, 
+  name: { type: String}, 
   audio: { type: mongoose.Schema.Types.ObjectId, ref: "AudioListening" },
   createdAt: { type: Date, default: Date.now }
 });

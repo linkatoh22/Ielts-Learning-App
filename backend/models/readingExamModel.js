@@ -46,7 +46,6 @@ const questionSchema = new mongoose.Schema({
     enum: [
       
       "True / False/ Not Given",
-      "Yes /No / Not Given",
       "Matching",
       "Multiple Choice",
       "Complete Passage"
@@ -80,7 +79,7 @@ const passageSchema = new mongoose.Schema({
 });
 
 const readingTestSchema = new mongoose.Schema({
-  name: { type: String, required: true }, 
+  name: { type: String}, 
   passages: { type: mongoose.Schema.Types.ObjectId, ref: "PassageReading" },
   createdAt: { type: Date, default: Date.now }
 });

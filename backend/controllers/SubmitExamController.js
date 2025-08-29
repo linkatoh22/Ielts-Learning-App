@@ -2,11 +2,13 @@ const { ReadingTest, PassageReading } = require("../models/readingExamModel.js")
 const {ListeningTest, audioListening } = require("../models/listeningExamModel.js")
 const Submission = require("../models/submissionModel.js")
 
-const submitReadingTest = async (req, res) => {
+const submitReadingTest = async (req, res,next) => {
   try {
     
     const { id } = req.params; // readingTestId
+    
     const { answers } = req.body; 
+    
     const readingTest = await ReadingTest.findById(id).populate("passages");
     let userId = req.user._id;
 
@@ -65,12 +67,15 @@ const submitReadingTest = async (req, res) => {
       readingTestId: id,
       passageId:passage._id,
       answers:userAnswer,
+      questionlength:allQuestions.length,
       score
     });
 
     await submission.save();
 
     res.status(200).json({
+      status:"SUCCESS",
+      code:200,
       message: "Submitted successfully",
       submitDetail:{
         score,
@@ -86,22 +91,25 @@ const submitReadingTest = async (req, res) => {
 };
 
 
-const submitListeningTest = async (req, res) => {
+const submitListeningTest = async (req, res,next) => {
   try {
     
     const { id } = req.params; // readingTestId
     const { answers } = req.body; 
+    console.log("answers: ",answers)
     const listeningTest = await ListeningTest.findById(id).populate("audio");
     let userId = req.user._id;
 
     if (!listeningTest) {
-      return res.status(404).json({ message: "Listening test not found" });
+      res.status(404);
+      throw new Error("Listening test not found");
     }
 
     const audio = await audioListening.findById(listeningTest.audio);
     
     if (!audio) {
-      return res.status(404).json({ message: "Listening Audio not found" });
+      res.status(404);
+      throw new Error("Listening test not found");
     }
 
     
@@ -147,13 +155,14 @@ const submitListeningTest = async (req, res) => {
       listeningTestId: id,
       audioId:audio._id,
       answers:userAnswer,
+      questionlength:allQuestions.length,
       score
     });
 
     
     await submission.save();
 
-    res.status(200).json({
+    return  res.status(200).json({
       message: "Submitted successfully",
       submitDetail:{
         score,
@@ -163,8 +172,7 @@ const submitListeningTest = async (req, res) => {
     });
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error" });
+    next(error)
   }
 };
 
@@ -174,7 +182,7 @@ const getAllSubmittedListeningTest = async (req, res, next) => {
     let userId = req.user._id;
     const ListeningTest = await Submission.find({userId:userId,examType:"Listening"})
     if(!ListeningTest) {res.status(404); throw new Error("No Listening Test Found")}
-    res.status(200).json({
+    return  res.status(200).json({
       message: "Submitted successfully",
       exam:ListeningTest
     });
@@ -190,7 +198,7 @@ const getAllSubmittedReadingTest = async (req, res,next) => {
     console.log("userId: ", userId)
     const ReadingTest = await Submission.find({userId:userId,examType:"Reading"})
     if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
-    res.status(200).json({
+    return res.status(200).json({
       code:200,
         status:"SUCCESS",
       message: "Submitted successfully",
@@ -211,9 +219,9 @@ const getDetailSubmittedListeningTest = async(req,res,next)=>{
   try{
       
       const { id } = req.params; // readingTest
-      const ListeningTest = await Submission.findOne({_id:id})
+      const ListeningTest = await Submission.findOne({_id:id}).populate("audioId")
       if(!ListeningTest) {res.status(404); throw new Error("No Listening Test Found")}
-      res.status(200).json({
+      return  res.status(200).json({
         code:200,
         status:"SUCCESS",
         message: "Submitted successfully",
@@ -230,9 +238,9 @@ const getDetailSubmittedReadingTest = async(req,res,next)=>{
       
       const { id } = req.params; // readingTest
    
-      const ReadingTest = await Submission.findOne({_id:id})
+      const ReadingTest = await Submission.findOne({_id:id}).populate("passageId")
       if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
-      res.status(200).json({
+      return  res.status(200).json({
         code:200,
         status:"SUCCESS",
         message: "Get test successfully",

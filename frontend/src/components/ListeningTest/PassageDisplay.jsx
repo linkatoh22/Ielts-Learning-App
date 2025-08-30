@@ -17,7 +17,7 @@ export default function PassageDisplay({audio}){
     
      
     return(
-        <Box sx={{width:"50%",p:3,height:"64.6vh",overflow:"auto",display:"flex",alignItems:"center",flexDirection:"column"}} >
+        <Box sx={{width:"50%",p:3,overflow:"auto",display:"flex",alignItems:"center",flexDirection:"column"}} >
 
             <Box sx={{textAlign:"center",mb:1}}>
                     <Typography variant="h6" sx={{fontWeight:"bold"}}>Bài nghe:</Typography>

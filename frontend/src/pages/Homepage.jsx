@@ -21,7 +21,7 @@ export default function HomePage() {
         <Box sx={{width:"80%",px:3,display:"flex",flexDirection:"column",gap:4,margin:"auto"}}>
             <MenuTop/>
             <ServicesSection/>
-            <WebPlan/>
+            {/* <WebPlan/> */}
             
         </Box>
       // </Box>

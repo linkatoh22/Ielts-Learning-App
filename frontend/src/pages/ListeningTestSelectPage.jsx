@@ -32,26 +32,26 @@ export function SelectListeningPage() {
         navigate(`/listening/thi/${id}`)
     }
     return (
-
-        <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4,minHeight:"75vh",justifyContent:"center"}}>
-
+        <Box sx={{minHeight:"71.7vh",p:5}}>
+        <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",p:5,justifyContent:"center",border: "1px solid #e0e0e0"}}>
+            
                 <Typography variant="h4" sx={{fontWeight:"bold",color:"var(--warning-700)"}}>Luyện đề thi Listening</Typography>
                 <Divider></Divider>
 
-                <Paper elevation={4} sx={{width:"100%",py:2,px:4,minHeight:'50vh'}}>
-                    <Box my={2}>
-                        <Typography variant="h6" sx={{fontWeight:600}}>Chọn đề Listening</Typography>
+                <Paper elevation={4} sx={{width:"100%",minHeight:'50vh'}}>
+                    <Box sx={{px:5,py:2}}>
+                        <Typography variant="h6" sx={{fontWeight:600}}>Chọn đề thi:</Typography>
                         <Divider></Divider>
                     </Box>
-                    <Box sx={{display:"flex",flexWrap:"wrap",gap:2}}>
+                    <Box sx={{display:"flex",flexWrap:"wrap",gap:2,px:5}}>
                             {
                                 exam?.map((item,index)=>{
                                     return <Box
                                         onClick={()=>handleNavTest(item._id)}
                                             key={index+1}
                                             sx={{
-                                                width:50,
-                                                height: 50,
+                                                width:60,
+                                                height: 60,
                                                 border: "1px solid #e0e0e0",
                                                 borderRadius: 2,
                                                 display: "flex",
@@ -89,6 +89,7 @@ export function SelectListeningPage() {
             
 
         </Box>
-    
+        </Box>
+                                                                
     )
 }

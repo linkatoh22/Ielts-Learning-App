@@ -30,13 +30,13 @@ export default function QuestionTF({QuestionPart,userAnswer}){
                                     
                                     <FormControl sx={{ m: 1, minWidth: 100}}>
                                         <Select
-                                        value={userAnswer[item._id]?.answer}
+                                        value={userAnswer[item._id].answer}
                                         disabled
                                         // onChange={handleChange}
                                         
                                         inputProps={{ 'aria-label': 'Without label' }}
                                         >
-                                            {optionText?.map((opt, index) => (
+                                            {optionText.map((opt, index) => (
                                                 <MenuItem key={index} value={opt}>
                                                 {opt}
                                                 </MenuItem>

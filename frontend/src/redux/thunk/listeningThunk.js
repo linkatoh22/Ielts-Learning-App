@@ -63,6 +63,7 @@ export const fetchGetDetailSubmitTest = createAsyncThunk(
     async(payload,{rejectWithValue })=>{
         try{
             const response = await ListeningApi.fetchGetDetailSubmitTest(payload);
+            console.log("response: ",response)
             return response.data
         }
         catch(error){
@@ -76,7 +77,7 @@ export const fetchGetDetailTest = createAsyncThunk(
     "listening/fetchGetDetailTest",
     async(payload,{rejectWithValue })=>{
         try{
-            console.log("HERE");
+            
             const response = await ListeningApi.fetchGetDetailTest(payload);
            
             return response.data

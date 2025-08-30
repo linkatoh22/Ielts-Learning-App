@@ -11,10 +11,10 @@ import { useEffect, useState } from "react";
 import { ScoreCircle } from "../components/History/ScoreCircle";
 import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
-import PassageDisplay from "../components/ReadingTestView/PassageDisplay";
-import ExerciseAnswer from "../components/ReadingTestView/ExerciseAnswer";
+import PassageDisplay from "../components/ListeningTestView/PassageDisplay";
+import ExerciseAnswer from "../components/ListeningTestView/ExerciseAnswer";
 export default function ListeningHistoryPage(){
-    const { loading,examDetail } = useSelector(s => s.reading)
+    const { loading,examDetail } = useSelector(s => s.listening)
     const {examId} = useParams();
     const dispatch = useDispatch();
     useEffect(()=>{
@@ -191,11 +191,14 @@ export default function ListeningHistoryPage(){
                     <Box width={"100%"}>
                         <Box sx={{display:"flex",py:2}}>
                             <ExerciseAnswer 
-                                partOne={examDetail?.audio?.questionsPart[0]} 
+                                partOne={examDetail?.audioId?.questionsPart[0]} 
                                 
                                 userAnswer = {userAnswer}
                             ></ExerciseAnswer>
-                            <PassageDisplay passage={examDetail?.passageId?.content} title={examDetail?.passageId?.title}></PassageDisplay>
+
+
+                            
+                            <PassageDisplay audio={examDetail?.audioId?.audioSrc} title={examDetail?.passageId?.title}></PassageDisplay>
                             
                         </Box>
                     </Box>

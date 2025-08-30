@@ -95,8 +95,9 @@ const submitListeningTest = async (req, res,next) => {
   try {
     
     const { id } = req.params; // readingTestId
+    
     const { answers } = req.body; 
-    console.log("answers: ",answers)
+    
     const listeningTest = await ListeningTest.findById(id).populate("audio");
     let userId = req.user._id;
 
@@ -163,9 +164,12 @@ const submitListeningTest = async (req, res,next) => {
     await submission.save();
 
     return  res.status(200).json({
+      code:200,
+      status:"SUCCESS",
       message: "Submitted successfully",
       submitDetail:{
         score,
+
         total: allQuestions.length,
         submission
       }
@@ -195,14 +199,14 @@ const getAllSubmittedListeningTest = async (req, res, next) => {
 const getAllSubmittedReadingTest = async (req, res,next) => {
   try {
     const userId = req.user._id;
-    console.log("userId: ", userId)
+    
     const ReadingTest = await Submission.find({userId:userId,examType:"Reading"})
     if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
     return res.status(200).json({
-      code:200,
-        status:"SUCCESS",
-      message: "Submitted successfully",
-      exam:ReadingTest,
+        code:200,
+          status:"SUCCESS",
+        message: "Submitted successfully",
+        exam:ReadingTest,
       
       
     });
@@ -219,7 +223,7 @@ const getDetailSubmittedListeningTest = async(req,res,next)=>{
   try{
       
       const { id } = req.params; // readingTest
-      const ListeningTest = await Submission.findOne({_id:id}).populate("audioId")
+      const ListeningTest = await Submission.findOne({_id:id}).populate("audioId").sort({ submittedAt: 1 }); 
       if(!ListeningTest) {res.status(404); throw new Error("No Listening Test Found")}
       return  res.status(200).json({
         code:200,
@@ -238,7 +242,7 @@ const getDetailSubmittedReadingTest = async(req,res,next)=>{
       
       const { id } = req.params; // readingTest
    
-      const ReadingTest = await Submission.findOne({_id:id}).populate("passageId")
+      const ReadingTest = await Submission.findOne({_id:id}).populate("passageId").sort({ submittedAt: 1 }); 
       if(!ReadingTest) {res.status(404); throw new Error("No Reading Test Found")}
       return  res.status(200).json({
         code:200,

@@ -36,7 +36,7 @@ import { useSelector,useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const LogoImg = styled.img`
-   
+    
     width: 7.5%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -197,7 +197,7 @@ export default function MainMenu() {
                                     <ListItemIcon sx={{color:"var(--success-700)"}} >
                                         <AutoStoriesIcon fontSize="small" />
                                     </ListItemIcon>
-                                    <ListItemText sx={{color:"var(--success-700)"}} > Luyện thi Reading </ListItemText>    
+                                    <ListItemText sx={{color:"var(--success-700)"}}  > Luyện thi Reading </ListItemText>    
                                     
                                 </MenuItem>
                                 <MenuItem onClick={()=>handleTest("listening")} sx={{p:1.2}}>
@@ -205,7 +205,7 @@ export default function MainMenu() {
                                         <HeadphonesIcon fontSize="small" />
                                     </ListItemIcon>
                                     
-                                    <ListItemText sx={{color:"var(--warning-700)"}} > Luyện thi Listening </ListItemText>   
+                                    <ListItemText sx={{color:"var(--warning-700)"}} onClick={()=>{ navigate("/listening/lich-su-thi")}} > Luyện thi Listening </ListItemText>   
                                 </MenuItem>
                             </Menu>
                         </Paper>
@@ -260,7 +260,9 @@ export default function MainMenu() {
                                         
                                     </MenuItem>
 
-                                    <MenuItem onClick={handleCloseUser} sx={{p:1.2}}>
+                                    <MenuItem 
+                                        onClick={()=>{ navigate("/reading/lich-su-thi"); handleCloseUser;}}
+                                     sx={{p:1.2}}>
                                         <ListItemIcon sx={{color:"var(--success-700)"}} >
                                             <AutoStoriesIcon fontSize="small" />
                                         </ListItemIcon>
@@ -268,7 +270,7 @@ export default function MainMenu() {
                                         <ListItemText sx={{fontWeight:"bold", color:"var(--success-700)"}} > Lịch sử thi Reading </ListItemText>   
                                     </MenuItem>
 
-                                    <MenuItem onClick={handleCloseUser} sx={{color:"var(--warning-700)",p:1.2}} >
+                                    <MenuItem onClick={()=>{ navigate("/listening/lich-su-thi"); handleCloseUser;}} sx={{color:"var(--warning-700)",p:1.2}} >
                                         <ListItemIcon sx={{color:"var(--warning-700)"}} >
                                             <HeadphonesIcon fontSize="small" />
                                         </ListItemIcon>

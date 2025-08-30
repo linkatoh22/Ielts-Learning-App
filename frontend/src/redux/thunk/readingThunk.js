@@ -68,7 +68,9 @@ export const fetchGetAllSubmitTest = createAsyncThunk(
     "reading/fetchGetAllSubmitTest",
     async(payload,{rejectWithValue })=>{
         try{
+            
             const response = await ReadingApi.fetchGetAllSubmitTest(payload);
+            console.log("response: ",response)
             return response.data
         }
         catch(error){

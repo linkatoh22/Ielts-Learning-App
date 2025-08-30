@@ -33,9 +33,9 @@ export function SelectListeningPage() {
     }
     return (
 
-        <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4}}>
+        <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4,minHeight:"75vh",justifyContent:"center"}}>
 
-                <Typography variant="h5" sx={{fontWeight:"bold",pt:4}}>Luyện đề thi Listening</Typography>
+                <Typography variant="h4" sx={{fontWeight:"bold",color:"var(--warning-700)"}}>Luyện đề thi Listening</Typography>
                 <Divider></Divider>
 
                 <Paper elevation={4} sx={{width:"100%",py:2,px:4,minHeight:'50vh'}}>

@@ -86,7 +86,9 @@ const listeningSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchGetDetailTest.fulfilled, (state, action) => {
+                
                 state.loading = false;
+                
                 state.examDetail = action.payload.exam;
                 state.error = null;
             })

@@ -17,7 +17,6 @@ import {
 export default function QuestionCP({QuestionPart,userAnswer,setUserAnswer}){
 
     const handleChange=(questionId,value)=>{
-        
         setUserAnswer(prev=>({
                  ...prev,
                   [questionId]: value

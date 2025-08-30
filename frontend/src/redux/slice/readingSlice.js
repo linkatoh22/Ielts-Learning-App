@@ -57,7 +57,7 @@ const listeningSlice = createSlice({
             })
             .addCase(fetchGetAllSubmitTest.fulfilled, (state, action) => {
                 state.loading = false;
-                state.exam = action.payload.data.exam;
+                state.exam = action.payload.exam;
                 state.error = null;
             })
             .addCase(fetchGetAllSubmitTest.rejected, (state, action) => {

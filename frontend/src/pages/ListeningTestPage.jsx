@@ -23,10 +23,11 @@ export default function ListeningTestPage(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { loading,examDetail } = useSelector(s => s.listening)
-
+    const [userAnswer,setUserAnswer] = useState([]);
     const {examId} = useParams();
     
     useEffect(()=>{
+        setUserAnswer([])
         const fetchDetail= async()=>{
             await dispatch(fetchGetDetailTest({id:examId}))
         }
@@ -34,7 +35,7 @@ export default function ListeningTestPage(){
     },[examId])
 
 
-    const [userAnswer,setUserAnswer] = useState([]);
+    
 
     useEffect(()=>{
         console.log("examDetail: ",examDetail)
@@ -65,7 +66,7 @@ export default function ListeningTestPage(){
 
        
 
-        const response = await dispatch(fetchSubmitExam({examId:examDetail._id,data:{answers:answers}}))
+        const response = await dispatch(fetchSubmitExam({id:examDetail._id,data:{answers:answers}}))
         
         console.log("answers: ", answers);
         if (response.payload.status === "SUCCESS") {

@@ -14,7 +14,7 @@ import {
 } from "@mui/material"
 export default function PassageDisplay({passage,title}){
     return(
-        <Box sx={{width:"50%",p:3,height:"70vh",overflow:"auto"}} >
+        <Box sx={{width:"50%",p:3,height:"67vh",overflow:"auto"}} >
             <Box sx={{textAlign:"center",mb:1}}>
                     <Typography variant="h6" sx={{fontWeight:"bold"}}>{title}</Typography>
             </Box>

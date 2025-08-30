@@ -24,6 +24,7 @@ export const ReadingApi = {
 
     fetchGetAllSubmitTest: () =>
         axiosClient.get(`${BASE_URL}/reading-test/submit/get-all-submit-test`,{  useAuth:true }),
+    
     fetchGetDetailSubmitTest: ({id}) =>
         axiosClient.get(`${BASE_URL}/reading-test/submit/get-detail-submit-test/${id}`,{  useAuth:true }),
     fetchGetDetailTest: ({id}) =>

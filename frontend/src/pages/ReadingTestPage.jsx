@@ -104,13 +104,18 @@ export default function ReadingTestPage(){
 
     return(
         <Box py={2}>
-            
-         <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",margin:"auto" }}>
-            <CompleteBar userAnswer={userAnswer}></CompleteBar>
-            <Button 
-            
-                variant="contained" 
-                onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+        <Box sx={{width:"100%",textAlign:"center"}}>
+            <Typography variant="h6" fontWeight={"bold"}>Đề thi Reading</Typography>
+            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2 }}>
+                <CompleteBar userAnswer={userAnswer}></CompleteBar>
+
+                <Button 
+                    color="secondary"
+                    sx={{fontWeight:"bold", px:4, py:1}}
+                    variant="contained" 
+                    onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+
+            </Box>
         </Box>
         <Box sx={{display:"flex",py:2}}>
 

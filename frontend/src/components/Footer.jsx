@@ -33,13 +33,13 @@ export default function Footer() {
           <Typography> © 2025 Learning IELTS. All rights reserved. Ho Chi Minh City</Typography>
         </Box>
 
-        <Box sx={{display:"flex", gap:3, alignItems:"center"}}>
+        {/* <Box sx={{display:"flex", gap:3, alignItems:"center"}}>
           <Typography sx={{fontWeight:"bold"}}> Liên hệ:</Typography>
 
           <ImgButton src={facebook} ></ImgButton>
           <ImgButton src={zalo}></ImgButton>
           <ImgButton src={messenger}></ImgButton>
-        </Box>
+        </Box> */}
 
 
       

@@ -19,30 +19,38 @@ export default function UserPage(){
     // },[userInfo])
 
     return(
-        <Box sx={{width:"60%",display:"flex",flexDirection:"column",gap:2,margin:"auto",p:4}}>
+        <Box sx={{width:"50%",display:"flex",flexDirection:"column",gap:2,margin:"auto",p:4,minHeight:'71.7vh',alignItems:"center",justifyContent:"center"}}>
 
-                <Paper elevation={4} sx={{width:"100%",py:2,px:4,minHeight:'61.5vh',display:"flex",alignItems:"center",flexDirection:"column"}}>
-                        <Typography variant="h5" sx={{fontWeight:"bold",pt:4}}>Thông tin người dùng</Typography>
-                        <Grid container spacing={2} mx={5} my={2}>
+                <Paper elevation={4} sx={{width:"100%",py:8,px:4,display:"flex",alignItems:"center",flexDirection:"column"}}>
+                        <Typography variant="h4" sx={{fontWeight:"bold",pt:4}}>Thông tin người dùng</Typography>
+                        <Grid container spacing={2} mx={5} py={2}>
 
                             <Grid size={6}>
                                 <Box >
-                                    <Typography fontWeight={"bold"}>Họ tên:</Typography>
+                                    <Typography fontWeight={"bold"} variant="h6">Họ tên:</Typography>
                                     <TextField
                                     
                                     disabled
+                                    
                                         value={userInfo?.fullname}
                                     variant="standard"
                                     size="small"
-                                        
-                                    sx={{ mx: 1, width: 400 }}
+                                    
+                                    sx={{ 
+                                        mx: 1, 
+                                        width: 400,
+                                        "& .MuiInputBase-input": {
+                                        fontSize: "1.2rem",   // chỉnh cỡ chữ ở đây
+                                          // có thể thêm nếu cần
+                                        }
+                                    }}
                                     />
                                 </Box>
                             </Grid>
 
                             <Grid size={6}>
                                 <Box>
-                                    <Typography fontWeight={"bold"} >Email:</Typography>
+                                    <Typography fontWeight={"bold"} variant="h6">Email:</Typography>
                                     
                                     <TextField
                                     
@@ -51,14 +59,21 @@ export default function UserPage(){
                                     variant="standard"
                                     size="small"
                                         
-                                    sx={{ mx: 1, width: 400 }}
+                                    sx={{ 
+                                        mx: 1, 
+                                        width: 400,
+                                        "& .MuiInputBase-input": {
+                                        fontSize: "1.2rem",   // chỉnh cỡ chữ ở đây
+                                          // có thể thêm nếu cần
+                                        }
+                                    }}
                                     />
                                 </Box>
                             </Grid>
 
                             <Grid size={6}>
                                 <Box>
-                                    <Typography fontWeight={"bold"} >Vai trò:</Typography>
+                                    <Typography fontWeight={"bold"} variant="h6">Vai trò:</Typography>
                                     
                                     <TextField
                                     
@@ -67,7 +82,14 @@ export default function UserPage(){
                                     variant="standard"
                                     size="small"
                                         
-                                    sx={{ mx: 1, width: 400 }}
+                                    sx={{ 
+                                        mx: 1, 
+                                        width: 400,
+                                        "& .MuiInputBase-input": {
+                                        fontSize: "1.2rem",   // chỉnh cỡ chữ ở đây
+                                          // có thể thêm nếu cần
+                                        }
+                                    }}
                                     />
                                 </Box>
                             </Grid>

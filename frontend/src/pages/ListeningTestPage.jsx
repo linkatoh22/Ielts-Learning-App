@@ -90,14 +90,18 @@ export default function ListeningTestPage(){
 
     return(
         <>
-        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
+        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",height:"78.5vh",gap:1  }}>
 
-
-            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",margin:"auto" }}>
+            <Typography variant="h6" fontWeight={"bold"}>Đề thi Listening</Typography>
+            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2  }}>
 
                 
                 <CompleteBar userAnswer={userAnswer}></CompleteBar>
-                <Button variant="contained" onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+                <Button 
+                    color="secondary"
+                    sx={{fontWeight:"bold", px:4, py:1}}
+                    variant="contained" 
+                    onClick={()=>handleSubmitTest()}>Nộp bài</Button>
             </Box>
 
 

@@ -22,11 +22,11 @@ passport.use(new GoogleStrategy({
                 fullname:profile.displayName,
                 email:profile.emails[0].value,
                 password:"",
-                role:"Free user",
+                role:"user",
                 isGoogleUser:true
             }
         )
-
+        
         return done(null,user);
     }
     

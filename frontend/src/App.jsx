@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import Home from "./pages/Homepage";
 import RootLayout from "./Layout";
 import theme from "./theme";
@@ -22,7 +22,11 @@ import HistoryReadingMenuPage from "./pages/HistoryMenuReadingPage";
 import HistoryListeningMenuPage from "./pages/HistoryMenuListeningPage";
 import UserPage from "./pages/UserPage";
 import { ChangePasswordPage } from "./pages/ChangePasswordPage";
+
 function App() {
+  
+
+
   return (
     
     <Provider store={store}>

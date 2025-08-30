@@ -1,6 +1,6 @@
 const bcrypt = require("bcrypt");
 const User = require("../../models/userModel")
-const UserOTPVerification = require("../../models/UserOTPVerification")
+const UserOTPVerification = require("../../models/userOtpVerification")
 const {transporter} = require("../../configs/sendEmail");
 
 

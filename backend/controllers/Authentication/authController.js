@@ -4,7 +4,6 @@ const User = require("../../models/userModel")
 const {generateAccessToken, generateRefreshToken} = require("../../utils/TokenFunc")
 const {sendOTPVerificationEmail} = require("./authOTPControllers");
 
-
 const signUp = async (req, res,next)=>{
     try{
         const fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
@@ -34,12 +33,13 @@ const signUp = async (req, res,next)=>{
                     fullname,
                     email,
                     password:hashedPassword,
-                    role:"Free user",
+                    role:"user",
                     isGoogleUser:false
                 }
             )
             
         
+
         return res.status(200).json({
             status:"Success",
             code:200,
@@ -101,7 +101,7 @@ const logIn = async (req, res,next)=>{
             //DEPLOY THÌ CHUYỂN SANG None
             maxAge:7*24*60*60*1000
         })
-
+        
         return res.status(200).json({
             message:"Login Successfully",
             status:"Success",

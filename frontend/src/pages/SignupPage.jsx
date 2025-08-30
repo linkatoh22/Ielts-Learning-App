@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { fetchSignUp } from "../redux/thunk/authThunk";
 import { useNavigate } from "react-router-dom";
+import { trackEvent } from "../analytics";
 const GoogleIcon  = styled.div`
 
     display:flex;
@@ -56,7 +57,7 @@ export function SignupPage() {
         const response = await dispatch(fetchSignUp(formData));
         if (response.payload.status === "Success") {
 
-            
+            trackEvent("submit_form", "lead", "signup_form");
              const newUserId = response.payload.data.userId;
            
             toast.success("Đăng ký thành công! Vui lòng đăng nhập...");

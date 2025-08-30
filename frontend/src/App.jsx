@@ -22,7 +22,7 @@ import HistoryReadingMenuPage from "./pages/HistoryMenuReadingPage";
 import HistoryListeningMenuPage from "./pages/HistoryMenuListeningPage";
 import UserPage from "./pages/UserPage";
 import { ChangePasswordPage } from "./pages/ChangePasswordPage";
-
+import { AdminDashboardPage } from "./pages/AdminDashboardPage";
 function App() {
   
 
@@ -47,18 +47,18 @@ function App() {
 
                   <Route element={<PrivateRoute/>}>
                         <Route element={<RootLayout/>}>
-                          <Route path="/reading/luyen-thi" element={<SelectReadingPage />} />
-                           <Route path="/listening/luyen-thi" element={<SelectListeningPage />} />
+                            <Route path="/reading/luyen-thi" element={<SelectReadingPage />} />
+                            <Route path="/listening/luyen-thi" element={<SelectListeningPage />} />
 
-                           <Route path="/reading/thi/:examId" element={<ReadingTestPage />} />
-                           <Route path="/listening/thi/:examId" element={<ListeningTestPage/>} />
+                            <Route path="/reading/thi/:examId" element={<ReadingTestPage />} />
+                            <Route path="/listening/thi/:examId" element={<ListeningTestPage/>} />
 
-                           <Route path="/reading/lich-su-thi/:examId" element={<ReadingHistoryPage />} />
-                           <Route path="/listening/lich-su-thi/:examId" element={<ListeningHistoryPage />} />
-                          <Route path="/reading/lich-su-thi" element={<HistoryReadingMenuPage />} />
-                          <Route path="/listening/lich-su-thi" element={<HistoryListeningMenuPage />} />
-                          <Route path="/user" element={<UserPage />} />
-
+                            <Route path="/reading/lich-su-thi/:examId" element={<ReadingHistoryPage />} />
+                            <Route path="/listening/lich-su-thi/:examId" element={<ListeningHistoryPage />} />
+                            <Route path="/reading/lich-su-thi" element={<HistoryReadingMenuPage />} />
+                            <Route path="/listening/lich-su-thi" element={<HistoryListeningMenuPage />} />
+                            <Route path="/user" element={<UserPage />} />
+                            <Route  path="/admin/dashboard" element={<AdminDashboardPage />} ></Route>
                         </Route>
                   </Route>
 

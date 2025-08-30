@@ -16,6 +16,10 @@ export const AuthApi = {
     fetchResendOTP : (data) =>
         axios.post(`${BASE_URL}/auth/resend-otp`,data),
     fetchUserDetail: (data)=>
-        axiosClient.get(`${BASE_URL}/auth/get-user-info`,{useAuth:true})
+        axiosClient.get(`${BASE_URL}/auth/get-user-info`,{useAuth:true}),
+    fetchGetTraffic: (data)=>
+        axiosClient.get(`${BASE_URL}/admin/traffic`,{useAuth:true}),
+    fetchGetLeads: (data)=>
+        axiosClient.get(`${BASE_URL}/admin/leads`,{useAuth:true}),
   
 };

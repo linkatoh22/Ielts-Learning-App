@@ -24,6 +24,7 @@ app.use(cookieParser());
 app.use("/api/auth",require("./routes/authenticationRoutes"));
 app.use("/api/reading-test",require("./routes/readingExamRoutes"))
 app.use("/api/listening-test",require("./routes/listeningExamRoutes"))
+app.use("/api/admin",require("./routes/analyticsRoutes"))
 //
 const PORT = 3000;
 app.use(errorHandler);

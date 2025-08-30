@@ -57,9 +57,7 @@ export function SignupPage() {
         const response = await dispatch(fetchSignUp(formData));
         if (response.payload.status === "Success") {
 
-            trackEvent("submit_form", "lead", "signup_form");
-             const newUserId = response.payload.data.userId;
-           
+            await trackEvent("submit_form");
             toast.success("Đăng ký thành công! Vui lòng đăng nhập...");
             navigate(`/dang-nhap`);
 

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { fetchLogin,fetchSignUp,fetchResendOTP,fetchVerifyOTP,fetchLogOut,fetchUserDetail } from "../thunk/authThunk";
+import { fetchLogin,fetchSignUp,fetchResendOTP,fetchVerifyOTP,fetchLogOut,fetchUserDetail,fetchGetTraffic,fetchGetLeads } from "../thunk/authThunk";
 import { Satellite } from "lucide-react";
 
 const initialState = {
@@ -13,7 +13,10 @@ const initialState = {
     otpVerified: false,
     signUpSuccess: false,
 
-    userInfo:null
+    userInfo:null,
+    traffics:[],
+    leads:[],
+    
 }
 
 const authSlice = createSlice({
@@ -127,6 +130,36 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchUserDetail.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || "Đăng xuất thật bại";
+            })
+
+
+            .addCase(fetchGetTraffic.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchGetTraffic.fulfilled, (state, action) => {
+                state.loading = false;
+                state.traffics = action.payload.stats;
+                state.error = null;
+            })
+            .addCase(fetchGetTraffic.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || "Đăng xuất thật bại";
+            })
+
+
+            .addCase(fetchGetLeads.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchGetLeads.fulfilled, (state, action) => {
+                state.loading = false;
+                state.leads = action.payload.stats;
+                state.error = null;
+            })
+            .addCase(fetchGetLeads.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || "Đăng xuất thật bại";
             })

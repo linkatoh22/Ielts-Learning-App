@@ -82,3 +82,30 @@ export const fetchUserDetail = createAsyncThunk(
         }
     }
 )
+
+export const fetchGetTraffic = createAsyncThunk(
+    "auth/fetchGetTraffic",
+    async(_,{rejectWithValue })=>{
+        try{
+            const response = await AuthApi.fetchGetTraffic();
+            return response.data
+        }
+        catch(error){
+            return rejectWithValue (error.response?.data || error.message);
+        }
+    }
+)
+
+
+export const fetchGetLeads = createAsyncThunk(
+    "auth/fetchGetLeads",
+    async(_,{rejectWithValue })=>{
+        try{
+            const response = await AuthApi.fetchGetLeads();
+            return response.data
+        }
+        catch(error){
+            return rejectWithValue (error.response?.data || error.message);
+        }
+    }
+)

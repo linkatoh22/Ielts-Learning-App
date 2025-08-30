@@ -10,6 +10,14 @@ export const trackPageView = (path) => {
   ReactGA.send({ hitType: "pageview", page: path });
 };
 
-export const trackEvent = (action, category, label) => {
-  ReactGA.event({ action, category, label });
+  // export const trackEvent = (action, category, label) => {
+  //   ReactGA.event({ action, category, label });
+  // };
+
+
+export const trackEvent = (formName) => {
+  ReactGA.event("lead", {
+    form: formName,   // param bổ sung
+    action: "submit_form"
+  });
 };

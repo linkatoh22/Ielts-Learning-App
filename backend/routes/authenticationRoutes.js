@@ -11,6 +11,10 @@ const {handleAccessToken} = require("../controllers/Authentication/tokenControll
 require('../configs/google.js')
  
 const {sendResetLinkToEmail,changePassword} = require("../controllers/User/changePassword.js")
+const {AuthMiddleware} = require("../middlewares/authMiddlewares");
+
+
+const {getUserDetail} = require("../controllers/User/userInfoControllers.js")
 //LOG IN AND SIGN UP GOOGLE
 router.get('/google',
     passport.authenticate('google',{
@@ -44,4 +48,7 @@ router.route("/resend-OTP").post(resendOTP);
 //CHANGE PASSWORD
 router.route("/forget-password/send-link").post(sendResetLinkToEmail);
 router.route("/forget-password/change-password/:token").put(changePassword);
+
+
+router.route("/get-user-info").get(AuthMiddleware,getUserDetail)
 module.exports = router;

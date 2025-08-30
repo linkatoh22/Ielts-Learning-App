@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import axiosClient from "../interceptor/axiosClient";
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 
@@ -15,5 +15,7 @@ export const AuthApi = {
         axios.post(`${BASE_URL}/auth/verify-otp`,data),
     fetchResendOTP : (data) =>
         axios.post(`${BASE_URL}/auth/resend-otp`,data),
+    fetchUserDetail: (data)=>
+        axiosClient.get(`${BASE_URL}/auth/get-user-info`,{useAuth:true})
   
 };

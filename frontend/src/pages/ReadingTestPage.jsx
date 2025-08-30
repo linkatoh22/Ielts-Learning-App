@@ -19,6 +19,9 @@ import { useEffect, useState } from "react";
 import PassageDisplay from "../components/ReadingTest/PassageDisplay";
 import ExerciseAnswer from "../components/ReadingTest/ExerciseAnswer";
 import { toast } from "react-toastify";
+import { CompleteBar } from "../components/ListeningTest/CompleteBar";
+
+
 export default function ReadingTestPage(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -100,10 +103,14 @@ export default function ReadingTestPage(){
     // },[examDetail])
 
     return(
-        <>
-        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"flex-end",margin:"auto"}}>
+        <Box py={2}>
             
-            <Button variant="contained" onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+         <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",margin:"auto" }}>
+            <CompleteBar userAnswer={userAnswer}></CompleteBar>
+            <Button 
+            
+                variant="contained" 
+                onClick={()=>handleSubmitTest()}>Nộp bài</Button>
         </Box>
         <Box sx={{display:"flex",py:2}}>
 
@@ -118,7 +125,7 @@ export default function ReadingTestPage(){
         </Box>
 
         
-        </>
+        </Box>
     )
 }
 

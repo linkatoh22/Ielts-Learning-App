@@ -20,6 +20,7 @@ import ListeningTestPage from "./pages/ListeningTestPage";
 import ListeningHistoryPage from "./pages/ListeningHistoryPage";
 import HistoryReadingMenuPage from "./pages/HistoryMenuReadingPage";
 import HistoryListeningMenuPage from "./pages/HistoryMenuListeningPage";
+import UserPage from "./pages/UserPage";
 function App() {
   return (
     
@@ -50,6 +51,7 @@ function App() {
                            <Route path="/listening/lich-su-thi/:examId" element={<ListeningHistoryPage />} />
                           <Route path="/reading/lich-su-thi" element={<HistoryReadingMenuPage />} />
                           <Route path="/listening/lich-su-thi" element={<HistoryListeningMenuPage />} />
+                          <Route path="/user" element={<UserPage />} />
 
                         </Route>
                   </Route>

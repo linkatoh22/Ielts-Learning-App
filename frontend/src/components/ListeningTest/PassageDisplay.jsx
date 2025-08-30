@@ -14,12 +14,10 @@ import {
 } from "@mui/material"
 import { useEffect } from "react"
 export default function PassageDisplay({audio}){
-    useEffect(()=>{
-        console.log("audio src: ",audio)
-    },[audio])
+    
      
     return(
-        <Box sx={{width:"50%",p:3,height:"70vh",overflow:"auto",display:"flex",alignItems:"center",flexDirection:"column"}} >
+        <Box sx={{width:"50%",p:3,height:"64.6vh",overflow:"auto",display:"flex",alignItems:"center",flexDirection:"column"}} >
 
             <Box sx={{textAlign:"center",mb:1}}>
                     <Typography variant="h6" sx={{fontWeight:"bold"}}>Bài nghe:</Typography>

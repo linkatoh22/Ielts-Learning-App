@@ -21,6 +21,7 @@ import ListeningHistoryPage from "./pages/ListeningHistoryPage";
 import HistoryReadingMenuPage from "./pages/HistoryMenuReadingPage";
 import HistoryListeningMenuPage from "./pages/HistoryMenuListeningPage";
 import UserPage from "./pages/UserPage";
+import { ChangePasswordPage } from "./pages/ChangePasswordPage";
 function App() {
   return (
     
@@ -34,6 +35,7 @@ function App() {
                       <Route path="/dang-nhap" element={<LogInPage />} />
                       <Route path="/dang-ky" element={<SignupPage />} />
                       <Route path="/quen-mat-khau" element={<ForgetPasswordPage />} />
+                      <Route path="/doi-mat-khau/:tokenId" element={<ChangePasswordPage />} />
 
                       
 

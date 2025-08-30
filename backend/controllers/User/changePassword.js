@@ -1,5 +1,5 @@
 const User = require("../../models/userModel")
-const ResetToken = require("../../models/ResetPasswordTokenModel")
+const ResetToken = require("../../models/resetPasswordTokenModel")
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 const {transporter} = require("../../configs/sendEmail");

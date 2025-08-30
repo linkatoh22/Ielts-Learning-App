@@ -139,14 +139,14 @@ export default function MainMenu() {
         >
         <Box  sx={{width:"90%", margin:"auto"}}>
             <Toolbar>
-                <Box sx={{ display:"flex",alignItems:"center",flexGrow: 1,gap:2 }}>
+                <Box sx={{ display:"flex",alignItems:"center",flexGrow: 1,gap:2,cursor:"pointer" }} onClick={()=>navigate("/")}>
                     <LogoImg
                         src={Logo}
                     >
                        
                     </LogoImg>
 
-                    <Typography variant="h6" sx={{fontWeight:"bold"}}>
+                    <Typography variant="h6" sx={{fontWeight:"bold",color:"var(--main-blue)"}}>
                             IELTS LEARNING
                     </Typography>
 

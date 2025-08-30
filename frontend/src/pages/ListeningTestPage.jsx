@@ -19,6 +19,7 @@ import { useEffect, useState } from "react";
 import PassageDisplay from "../components/ListeningTest/PassageDisplay";
 import ExerciseAnswer from "../components/ListeningTest/ExerciseAnswer";
 import { toast } from "react-toastify";
+import { CompleteBar } from "../components/ListeningTest/CompleteBar";
 export default function ListeningTestPage(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -38,7 +39,6 @@ export default function ListeningTestPage(){
     
 
     useEffect(()=>{
-        console.log("examDetail: ",examDetail)
 
         examDetail?.audio?.questionsPart[0].questionDetail?.forEach((item)=>{
             setUserAnswer(prev=>({
@@ -90,22 +90,29 @@ export default function ListeningTestPage(){
 
     return(
         <>
-        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"flex-end",margin:"auto"}}>
-            
-            <Button variant="contained" onClick={()=>handleSubmitTest()}>Nộp bài</Button>
-        </Box>
-        <Box sx={{display:"flex",py:2}}>
+        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column"}}>
 
-            <PassageDisplay audio={examDetail?.audio?.audioSrc}></PassageDisplay>
-            <ExerciseAnswer 
-                userAnswer={userAnswer}
-                setUserAnswer={setUserAnswer}
-                partOne={examDetail?.audio?.questionsPart[0]} 
+
+            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",margin:"auto" }}>
+
                 
-            ></ExerciseAnswer>
-        </Box>
+                <CompleteBar userAnswer={userAnswer}></CompleteBar>
+                <Button variant="contained" onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+            </Box>
 
-        
+
+            <Box sx={{display:"flex",py:2}}>
+
+                <PassageDisplay audio={examDetail?.audio?.audioSrc}></PassageDisplay>
+                <ExerciseAnswer 
+                    userAnswer={userAnswer}
+                    setUserAnswer={setUserAnswer}
+                    partOne={examDetail?.audio?.questionsPart[0]} 
+                    
+                ></ExerciseAnswer>
+            </Box>
+
+        </Box>
         </>
     )
 }

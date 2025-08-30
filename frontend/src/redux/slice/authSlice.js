@@ -1,5 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
-import { fetchLogin,fetchSignUp,fetchResendOTP,fetchVerifyOTP,fetchLogOut } from "../thunk/authThunk";
+import { fetchLogin,fetchSignUp,fetchResendOTP,fetchVerifyOTP,fetchLogOut,fetchUserDetail } from "../thunk/authThunk";
+import { Satellite } from "lucide-react";
 
 const initialState = {
     
@@ -111,6 +112,21 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addCase(fetchLogOut.rejected, (state, action) => {
+                state.loading = false;
+                state.error = action.payload || "Đăng xuất thật bại";
+            })
+
+
+            .addCase(fetchUserDetail.pending, (state) => {
+                state.loading = true;
+                state.error = null;
+            })
+            .addCase(fetchUserDetail.fulfilled, (state, action) => {
+                state.loading = false;
+                state.userInfo = action.payload.user;
+                state.error = null;
+            })
+            .addCase(fetchUserDetail.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || "Đăng xuất thật bại";
             })

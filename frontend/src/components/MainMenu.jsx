@@ -252,7 +252,7 @@ export default function MainMenu() {
                                     </Box>
 
                                     <Divider />
-                                    <MenuItem onClick={handleCloseUser} sx={{p:1.2}}>
+                                    <MenuItem onClick={()=>{ navigate("/user"); handleCloseUser;}} sx={{p:1.2}} >
                                         <ListItemIcon sx={{color:"var(--blue-700)"}} >
                                             <InfoIcon fontSize="small" />
                                         </ListItemIcon>

@@ -20,14 +20,14 @@ const ServicesSection = () => {
       title: "Thi thử IELTS mô phỏng thực tế",
       features: [
         "Thi thử 2 kỹ năng mô phỏng phần mềm thi chính thức",
-        "Kho đề thi chuẩn hóa tổng hợp từ các kỳ thi chính thức",
+        "Đề thi chuẩn hóa tổng hợp từ các kỳ thi chính thức",
         "Giao diện thân thiện, thao tác dễ dàng",
       ],
     },
     {
       title: "Luyện đề & ôn tập theo kỹ năng",
       features: [
-        "Lựa chọn từng mã đề để luyện tập theo kỹ năng riêng",
+        
         "Có transcript, lời giải, mẫu bài nghe và đọc",
         "Không giới hạn lượt luyện, cập nhật thường xuyên",
       ],
@@ -36,8 +36,8 @@ const ServicesSection = () => {
       title: "Chấm điểm chính xác - nhanh chóng",
       features: [
         "Tự động chấm phần trắc nghiệm, xem điểm ngay",
-        "Đề Nghe & Viết được chấm ngay lập tức",
-        "Có nhận xét, gợi ý cải thiện từng kỹ năng",
+        "Đề Nghe & Đọc được chấm ngay lập tức",
+        "Có nhận xét, sửa bài",
       ],
     }
   ]
@@ -66,8 +66,7 @@ const ServicesSection = () => {
                 lineHeight: 1.6,
               }}
             >
-              Nền tảng luyện thi IELTS chuyên biệt, hỗ trợ toàn diện từ thi thử, luyện tập, chấm điểm đến cập nhật lịch
-              thi mới nhất.
+              Nền tảng luyện thi IELTS chuyên biệt, hỗ trợ toàn diện luyện tập kỹ năng nghe và đọc giúp bạn cải thiện kỹ năng.
             </Typography>
           
       </Box>
@@ -78,10 +77,12 @@ const ServicesSection = () => {
           <Grid item size={{ xs: 6, md: 4 }} key={index}>
             <Card
               sx={{
-                py:5,
+                py:2,
                 flex: 1,
                 px:2,
                 border: "2px solid #e3f2fd",
+                height: "100%",       // 👈 ép card full chiều cao
+                display: "flex", 
                 borderRadius: 3,
                 transition: "all 0.3s ease",
                 "&:hover": {

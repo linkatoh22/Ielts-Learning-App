@@ -20,7 +20,7 @@ const googleCallback = async (req,res,next) =>{
             maxAge:7 * 24 * 60 * 60 * 1000,
         })
 
-       return res.redirect(`${process.env.ORIGIN}/google-success?accessToken=${accessToken}&username=${user.fullname}&email=${user.email}`);
+       return res.redirect(`${process.env.ORIGIN}/google-success?accessToken=${accessToken}&username=${user.fullname}&email=${user.email}&role=${user.role}`);
         
     }   
     catch(error){

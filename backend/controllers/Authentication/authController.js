@@ -108,7 +108,8 @@ const logIn = async (req, res,next)=>{
             code:200,
             data:{
                 email:user.email,
-                fullname: user.fullname
+                fullname: user.fullname,
+                role:user.role,
             },
             token:{
                 accessToken,

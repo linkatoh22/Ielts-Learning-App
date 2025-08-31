@@ -66,7 +66,7 @@ export default function ExerciseAnswer({partOne,userAnswer,setUserAnswer}){
 
 
     return(
-        <Box sx={{width:"70%",p:3,overflow:"auto"}} >
+        <Box sx={{width:"70%",p:3,height:"55vh",overflow:"auto"}} >
             <Typography variant="h6" fontWeight={"bold"} color="var(--main-blue)">Bài Listening:</Typography>
             
             {QuestionType(partOne)}

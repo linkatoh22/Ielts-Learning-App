@@ -6,16 +6,18 @@ export function AuthProvider ({children}){
     const [accessToken,setAccessToken] = useState(null)
     const [fullName,setFullname] = useState("")
     const [email,setEmail] = useState("")
+    const [role,setRole] = useState("")
 
-    const login = (token,{fullname,email}) =>{
+    const login = (token,{fullname,email,role}) =>{
         
         setAccessToken(token);
         setFullname(fullname)
         setEmail(email)
-        
+        setRole(role)
         localStorage.setItem('accessToken',token)
         localStorage.setItem('fullName',fullname)
         localStorage.setItem('email',email)
+        localStorage.setItem('role',role)
         
     }
 
@@ -37,7 +39,7 @@ export function AuthProvider ({children}){
     }, []);
 
     return(
-        <AuthContext.Provider value={{accessToken,fullName,email,login,logout}}>
+        <AuthContext.Provider value={{accessToken,fullName,email,role,login,logout}}>
             {children}
         </AuthContext.Provider>
     )

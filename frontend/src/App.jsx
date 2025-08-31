@@ -23,6 +23,7 @@ import HistoryListeningMenuPage from "./pages/HistoryMenuListeningPage";
 import UserPage from "./pages/UserPage";
 import { ChangePasswordPage } from "./pages/ChangePasswordPage";
 import { AdminDashboardPage } from "./pages/AdminDashboardPage";
+import AdminRoute from "./AdminRoute";
 function App() {
   
 
@@ -58,11 +59,17 @@ function App() {
                             <Route path="/reading/lich-su-thi" element={<HistoryReadingMenuPage />} />
                             <Route path="/listening/lich-su-thi" element={<HistoryListeningMenuPage />} />
                             <Route path="/user" element={<UserPage />} />
-                            <Route  path="/admin/dashboard" element={<AdminDashboardPage />} ></Route>
+                            
                         </Route>
                   </Route>
 
-                  
+                  <Route element={<AdminRoute/>}>
+                        <Route element={<RootLayout/>}>
+                              <Route  path="/admin/dashboard" element={<AdminDashboardPage />} ></Route>
+                        </Route>
+                  </Route>
+
+
                      <Route path="/google-success" element={<GoogleSuccessPage />} />
                 
                 </Routes>

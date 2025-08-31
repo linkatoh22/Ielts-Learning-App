@@ -9,6 +9,7 @@ export default function GoogleSuccessPage(){
     const accessToken = params.get("accessToken");
     const username = params.get("username");
     const email = params.get("email");
+    const role = params.get("role");
     const {login}  = useContext(AuthContext);
     
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function GoogleSuccessPage(){
         
         if(accessToken){
             toast.success("Đăng nhập thành công")
-            login(accessToken,{fullname:username,email})
+            login(accessToken,{fullname:username,email,role})
             navigate("/")
         }
 

@@ -64,6 +64,7 @@ const LogoImg = styled.img`
 
 export default function MainMenu() {
     const { loading,error } = useSelector(s => s.auth)
+    const role = localStorage.getItem('role');
     const {fullName,email,accessToken,logout} = useContext(AuthContext);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -153,6 +154,16 @@ export default function MainMenu() {
 
                 </Box>
 
+
+                    {
+                        role=="admin"?
+                        <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}}  onClick={()=>navigate("/admin/dashboard")}>
+                            DASHBOARD
+                        </Button>
+                        :
+                        <>
+                        </>
+                    }
 
 
                 

@@ -43,6 +43,9 @@ export function AdminDashboardPage() {
     const dataTraffics = traffics?.map((d) => ({
         ...d,
         date: formatDate(d.date),
+        pageViews: Number(d.pageViews),   // ép về số
+        activeUsers: Number(d.activeUsers),
+        sessions: Number(d.sessions),
         }));
 
     
@@ -52,7 +55,7 @@ export function AdminDashboardPage() {
             count: Number(d.count), // ép về số
     }));
 
-    const sumTraffics = dataTraffics?.reduce((acc, d) => acc + (d.activeUsers || 0), 0);
+    const sumTraffics = dataTraffics?.reduce((acc, d) => acc + (d.pageViews || 0), 0);
     const sumLeads = dataLeads?.reduce((acc, d) => acc + (d.count || 0), 0);
     return (
         <Box sx={{width: "100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",gap:2,py:7}}>
@@ -164,7 +167,7 @@ export function AdminDashboardPage() {
 
 
                                 
-                                <Typography variant="h5" fontWeight={"bold"} mt={2}>{Math.round(sumLeads/sumTraffics)} (Lead/Traffics)</Typography>
+                                <Typography variant="h5" fontWeight={"bold"} mt={2}>{((sumLeads / sumTraffics)*100).toFixed(3)} % (Lead/Traffics)</Typography>
                             </Box>
                         </Card>
                     </Grid>

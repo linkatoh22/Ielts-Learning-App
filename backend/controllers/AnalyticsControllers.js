@@ -13,7 +13,7 @@ async function getLeadsStats() {
     const [response] = await analyticsDataClient.runReport({
     property: `properties/${PROPERTY_ID}`,
     dateRanges: [{ startDate: "30daysAgo", endDate: "today" }],
-    dimensions: [{ name: "eventName" }, { name: "date" }],
+    dimensions: [{ name: "date" }], 
     metrics: [{ name: "eventCount" }],
     dimensionFilter: {
       filter: {
@@ -23,8 +23,8 @@ async function getLeadsStats() {
     },
   });
 
-  return response.rows.map((row) => ({
-    date: row.dimensionValues[1].value,
+    return response.rows.map((row) => ({
+    date: row.dimensionValues[0].value,   // lấy index 0 vì chỉ có 1 dimension
     count: row.metricValues[0].value,
   }));
 }

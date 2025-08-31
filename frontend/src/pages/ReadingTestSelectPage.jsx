@@ -47,7 +47,16 @@ export function SelectReadingPage() {
                         </Box>
 
                         {loading?
-                        <LoadingContainer></LoadingContainer>
+                        <Box sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            minHeight: "40vh", // hoặc height phù hợp
+                            width: "100%"
+                        }}>
+                            <LoadingContainer />
+                        </Box>
+                       
                         :
                             <Box sx={{display:"flex",flexWrap:"wrap",gap:2,px:5}}>
                                 {

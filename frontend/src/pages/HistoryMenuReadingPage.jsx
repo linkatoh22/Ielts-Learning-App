@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
-
+import { LoadingContainer } from "../components/LoadingContainter";
 
 
 export default function HistoryReadingMenuPage(){
@@ -24,11 +24,18 @@ export default function HistoryReadingMenuPage(){
             await dispatch(fetchGetAllSubmitTest())
         }
         fetchDetailAll();
-    },[])
+    },[dispatch])
 
     const handleNavDetail = (questionId)=>{
            window.open(`/reading/lich-su-thi/${questionId}`, "_blank");
     }
+
+    useEffect(() => {
+        document.body.style.cursor = loading ? "wait" : "default";
+        return () => {
+            document.body.style.cursor = "default";
+        };
+    }, [loading]);
 
     return(
         <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4,minHeight:"75vh",justifyContent:"center"}}>
@@ -56,7 +63,22 @@ export default function HistoryReadingMenuPage(){
                             </TableHead>
 
                             <TableBody >
-                                {exam?.map((row,index) => (
+
+                                {loading?
+                                <TableRow>
+                                    <TableCell align="center" colSpan={6}>
+                                        <LoadingContainer>
+
+                                        </LoadingContainer>
+                                    </TableCell>
+                                </TableRow>
+                                :
+                                <>
+
+
+                                    {exam?.length>0?
+                                    <>
+                                    {exam?.map((row,index) => (
                                     <TableRow
                                     
                                     >
@@ -79,6 +101,23 @@ export default function HistoryReadingMenuPage(){
                                         
                                         </TableRow>
                                 ))}
+                                </>
+
+                                :
+                                <TableRow>
+                                    <TableCell align="center" colSpan={6}>
+                                    Chưa có lịch sử làm bài nào
+                                    </TableCell>
+                                </TableRow>
+                                
+                                
+                                
+                                }
+                                </>
+                                }
+
+                                
+                                
                             </TableBody>
                         </Table>
                         </TableContainer>

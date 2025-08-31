@@ -20,7 +20,7 @@ import PassageDisplay from "../components/ReadingTest/PassageDisplay";
 import ExerciseAnswer from "../components/ReadingTest/ExerciseAnswer";
 import { toast } from "react-toastify";
 import { CompleteBar } from "../components/ListeningTest/CompleteBar";
-
+import { LoadingContainer } from "../components/LoadingContainter";
 
 export default function ReadingTestPage(){
     const navigate = useNavigate();
@@ -40,6 +40,7 @@ export default function ReadingTestPage(){
     const [userAnswer,setUserAnswer] = useState([]);
 
     useEffect(()=>{
+        setUserAnswer([])
         examDetail?.passages?.questionsPartOne?.questionDetail?.forEach((item)=>{
             setUserAnswer(prev=>({
                  ...prev,
@@ -67,6 +68,15 @@ export default function ReadingTestPage(){
             )
         })
     },[examDetail])
+
+
+    useEffect(() => {
+                      document.body.style.cursor = loading ? "wait" : "default";
+                      return () => {
+                          document.body.style.cursor = "default";
+                      };
+                  }, [loading]);
+
 
 
     const handleSubmitTest = async()=>{
@@ -104,10 +114,18 @@ export default function ReadingTestPage(){
 
     return(
         <Box py={2}>
+
+        {
+            loading?
+            <Box sx={{width:"100%",height:"76.1vh"}}>
+            <LoadingContainer></LoadingContainer>
+            </Box>
+            :
+            <>
         <Box sx={{width:"100%",textAlign:"center"}}>
             <Typography variant="h6" fontWeight={"bold"}>Đề thi Reading</Typography>
-            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2 }}>
-                <CompleteBar userAnswer={userAnswer}></CompleteBar>
+            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2}}>
+                <CompleteBar  userAnswer={userAnswer}></CompleteBar>
 
                 <Button 
                     color="secondary"
@@ -117,19 +135,21 @@ export default function ReadingTestPage(){
 
             </Box>
         </Box>
+        
         <Box sx={{display:"flex",py:2}}>
 
-            <PassageDisplay passage={examDetail?.passages?.content} title={examDetail?.passages?.title}></PassageDisplay>
-            <ExerciseAnswer 
-                userAnswer={userAnswer}
-                setUserAnswer={setUserAnswer}
-                partOne={examDetail?.passages?.questionsPartOne} 
-                partTwo={examDetail?.passages?.questionsPartTwo} 
-                partThree={examDetail?.passages?.questionsPartThree}
-            ></ExerciseAnswer>
+        <PassageDisplay passage={examDetail?.passages?.content} title={examDetail?.passages?.title}></PassageDisplay>
+        <ExerciseAnswer 
+            userAnswer={userAnswer}
+            setUserAnswer={setUserAnswer}
+            partOne={examDetail?.passages?.questionsPartOne} 
+            partTwo={examDetail?.passages?.questionsPartTwo} 
+            partThree={examDetail?.passages?.questionsPartThree}
+        ></ExerciseAnswer>
         </Box>
+        </>
 
-        
+        }
         </Box>
     )
 }

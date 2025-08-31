@@ -28,9 +28,17 @@ export default function QuestionTF({QuestionPart,userAnswer}){
                         QuestionPart?.questionDetail.map((item,index)=>{
                             return <Box sx={{display:"flex",gap:0.3,px:1,alignItems:"center"}}>
                                     
-                                    <FormControl sx={{ m: 1, minWidth: 100}}>
+                                    <FormControl sx={{ m: 1, minWidth: 110}}>
                                         <Select
-                                        value={userAnswer[item._id]?.answer}
+
+                                        value={
+                                        optionText.includes(userAnswer[item._id]?.answer)
+                                        ? userAnswer[item._id]?.answer
+                                        : ""
+                                    }
+                                        
+
+                                        // value={userAnswer[item._id]?.answer}
                                         disabled
                                         // onChange={handleChange}
                                         

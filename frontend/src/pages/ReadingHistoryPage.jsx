@@ -13,6 +13,7 @@ import ClearIcon from '@mui/icons-material/Clear';
 import CheckIcon from '@mui/icons-material/Check';
 import PassageDisplay from "../components/ReadingTestView/PassageDisplay";
 import ExerciseAnswer from "../components/ReadingTestView/ExerciseAnswer";
+import { LoadingContainer } from "../components/LoadingContainter";
 export default function ReadingHistoryPage(){
     const { loading,examDetail } = useSelector(s => s.reading)
     const {examId} = useParams();
@@ -47,6 +48,13 @@ export default function ReadingHistoryPage(){
     const mid = Math.ceil(answers?.length / 2); // làm tròn lên nếu lẻ
     const leftAnswers = answers.slice(0, mid);
     const rightAnswers = answers.slice(mid);
+
+    useEffect(() => {
+        document.body.style.cursor = loading ? "wait" : "default";
+        return () => {
+            document.body.style.cursor = "default";
+        };
+    }, [loading]);
     
     return(
         <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4}}>
@@ -54,6 +62,15 @@ export default function ReadingHistoryPage(){
                 <Divider></Divider>
              <Paper elevation={4} sx={{width:"100%",py:2,px:4,minHeight:'50vh',display:"flex",alignItems:"center",flexDirection:"column"}}>
 
+
+                {
+                    loading?
+                    <Box sx={{width:"100%",height:"62.5vh"}}>
+                        <LoadingContainer>
+                        </LoadingContainer>
+                    </Box>
+                    :
+                    <Box sx={{width:"100%",display:"flex",alignItems:"center",flexDirection:"column"}}>
                     <Typography variant="h5" fontWeight={"bold"}>Điểm của bạn là:</Typography>
 
                     <Box display={"flex"} gap={4} alignItems={"center"} mt={4}>
@@ -97,7 +114,7 @@ export default function ReadingHistoryPage(){
                     
                     <Typography variant="h5" fontWeight={"bold"} mt={2}>Câu trả lời:</Typography>
 
-                    <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mt={4} width={"30%"}>
+                    <Box display={"flex"} justifyContent={"center"} alignItems={"center"} mt={4} sx={{width:"40%"}}>
                         
                         <Box display="flex" gap={4} mt={4} width="100%">
                         {/* Cột bên trái */}
@@ -201,6 +218,10 @@ export default function ReadingHistoryPage(){
                             
                         </Box>
                     </Box>
+                    </Box>
+                }
+                
+             
              </Paper>
         </Box>
     )

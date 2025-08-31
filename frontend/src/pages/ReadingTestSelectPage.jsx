@@ -7,7 +7,7 @@ import { fetchGetAllTest } from "../redux/thunk/readingThunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
+import { LoadingContainer } from "../components/LoadingContainter";
 
 export function SelectReadingPage() {
     const dispatch = useDispatch()
@@ -45,7 +45,11 @@ export function SelectReadingPage() {
                             <Typography variant="h6" sx={{fontWeight:600}}>Chọn đề thi</Typography>
                             <Divider></Divider>
                         </Box>
-                        <Box sx={{display:"flex",flexWrap:"wrap",gap:2,px:5}}>
+
+                        {loading?
+                        <LoadingContainer></LoadingContainer>
+                        :
+                            <Box sx={{display:"flex",flexWrap:"wrap",gap:2,px:5}}>
                                 {
                                     exam?.map((item,index)=>{
                                         return <Box
@@ -86,6 +90,8 @@ export function SelectReadingPage() {
 
                         </Box>
 
+                        }
+                        
                     </Paper>
 
                 

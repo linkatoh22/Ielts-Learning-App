@@ -20,6 +20,8 @@ import PassageDisplay from "../components/ListeningTest/PassageDisplay";
 import ExerciseAnswer from "../components/ListeningTest/ExerciseAnswer";
 import { toast } from "react-toastify";
 import { CompleteBar } from "../components/ListeningTest/CompleteBar";
+
+import { LoadingContainer } from "../components/LoadingContainter";
 export default function ListeningTestPage(){
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -33,13 +35,13 @@ export default function ListeningTestPage(){
             await dispatch(fetchGetDetailTest({id:examId}))
         }
         fetchDetail();
-    },[examId])
+    },[examId,dispatch])
 
 
     
 
     useEffect(()=>{
-
+        setUserAnswer([])
         examDetail?.audio?.questionsPart[0].questionDetail?.forEach((item)=>{
             setUserAnswer(prev=>({
                  ...prev,
@@ -50,7 +52,7 @@ export default function ListeningTestPage(){
         })
 
         
-    },[examDetail])
+    },[examDetail,dispatch])
 
     const handleSubmitTest = async()=>{
         const missingAnswer = Object.values(userAnswer).some(answer => !answer);
@@ -90,32 +92,43 @@ export default function ListeningTestPage(){
 
     return(
         <>
-        <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",height:"78.5vh",gap:1  }}>
+        <Box py={2}>
+            {
+            loading?
+                <Box sx={{width:"100%",height:"76.1vh"}}>
+                    <LoadingContainer></LoadingContainer>
+                </Box>
+            :
+            
 
-            <Typography variant="h6" fontWeight={"bold"}>Đề thi Listening</Typography>
-            <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2  }}>
+                <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",flexDirection:"column",height:"78.5vh",gap:1  }}>
 
-                
-                <CompleteBar userAnswer={userAnswer}></CompleteBar>
-                <Button 
-                    color="secondary"
-                    sx={{fontWeight:"bold", px:4, py:1}}
-                    variant="contained" 
-                    onClick={()=>handleSubmitTest()}>Nộp bài</Button>
-            </Box>
+                    <Typography variant="h6" fontWeight={"bold"}>Đề thi Listening</Typography>
+                    <Box sx={{width:"100%",display:"flex",alignItems:"center",justifyContent:"center",gap:2  }}>
+
+                        
+                        <CompleteBar userAnswer={userAnswer}></CompleteBar>
+                        <Button 
+                            color="secondary"
+                            sx={{fontWeight:"bold", px:4, py:1}}
+                            variant="contained" 
+                            onClick={()=>handleSubmitTest()}>Nộp bài</Button>
+                    </Box>
 
 
-            <Box sx={{display:"flex",py:2}}>
+                    <Box sx={{display:"flex",py:2}}>
 
-                <PassageDisplay audio={examDetail?.audio?.audioSrc}></PassageDisplay>
-                <ExerciseAnswer 
-                    userAnswer={userAnswer}
-                    setUserAnswer={setUserAnswer}
-                    partOne={examDetail?.audio?.questionsPart[0]} 
-                    
-                ></ExerciseAnswer>
-            </Box>
+                        <PassageDisplay audio={examDetail?.audio?.audioSrc}></PassageDisplay>
+                        <ExerciseAnswer 
+                            userAnswer={userAnswer}
+                            setUserAnswer={setUserAnswer}
+                            partOne={examDetail?.audio?.questionsPart[0]} 
+                            
+                        ></ExerciseAnswer>
+                    </Box>
 
+                </Box>
+            }
         </Box>
         </>
     )

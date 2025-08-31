@@ -19,7 +19,7 @@ export function CompleteBar({userAnswer}){
         console.log("userAnswer: ",userAnswer)
     },[userAnswer])
     return(
-        <Box display={"flex"} flexWrap={"wrap"} gap={2}>
+        <Box  width={"70%%"} display={"flex"} flexWrap={"wrap"} gap={2}>
             {Object.entries(userAnswer || {}).map(([key, value], index) => (
                 <Box
                     key={key}

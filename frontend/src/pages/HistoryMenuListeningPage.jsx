@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { useNavigate } from "react-router-dom";
-
+import { LoadingContainer } from "../components/LoadingContainter";
 
 
 export default function HistoryListeningMenuPage(){
@@ -34,6 +34,13 @@ export default function HistoryListeningMenuPage(){
     const handleNavDetail = (questionId)=>{
            window.open(`/listening/lich-su-thi/${questionId}`, "_blank");
     }
+
+    useEffect(() => {
+                      document.body.style.cursor = loading ? "wait" : "default";
+                      return () => {
+                          document.body.style.cursor = "default";
+                      };
+                  }, [loading]);
 
     return(
         <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",pb:4,minHeight:"75vh",justifyContent:"center"}}>
@@ -61,29 +68,52 @@ export default function HistoryListeningMenuPage(){
                             </TableHead>
 
                             <TableBody >
-                                {exam?.map((row,index) => (
-                                    <TableRow
-                                    
-                                    >
-                                            <TableCell align="center" >
-                                                {index+1}
-                                            </TableCell >
-                                            <TableCell align="center">
-                                                 {new Date(row?.submittedAt).toLocaleDateString("vi-VN")}{" "}
-                                                {new Date(row?.submittedAt).toLocaleTimeString("vi-VN")}
-                                            </TableCell>
-                                            <TableCell align="center">{row?.score??"-"}</TableCell>
-                                            <TableCell align="center">{row?.questionlength??"-"}</TableCell>
-                                            <TableCell align="center">{Math.round((row?.score/row?.questionlength)*100)??"-"}%</TableCell>
+                            {
+                                loading?
+                                <TableRow>
+                                    <TableCell align="center" colSpan={6}>
+                                        <LoadingContainer>
 
-                                            <TableCell align="center" onClick={()=>handleNavDetail(row._id)}>
-                                                <IconButton>
-                                                    <VisibilityIcon color="primary" ></VisibilityIcon>
-                                                </IconButton>
-                                            </TableCell>
+                                        </LoadingContainer>
+                                    </TableCell>
+                                </TableRow>
+                                :
+                                <>
+                                {exam?.length>0?
+                                <>
+                                    {exam?.map((row,index) => (
+                                        <TableRow
                                         
-                                        </TableRow>
-                                ))}
+                                        >
+                                                <TableCell align="center" >
+                                                    {index+1}
+                                                </TableCell >
+                                                <TableCell align="center">
+                                                    {new Date(row?.submittedAt).toLocaleDateString("vi-VN")}{" "}
+                                                    {new Date(row?.submittedAt).toLocaleTimeString("vi-VN")}
+                                                </TableCell>
+                                                <TableCell align="center">{row?.score??"-"}</TableCell>
+                                                <TableCell align="center">{row?.questionlength??"-"}</TableCell>
+                                                <TableCell align="center">{Math.round((row?.score/row?.questionlength)*100)??"-"}%</TableCell>
+
+                                                <TableCell align="center" onClick={()=>handleNavDetail(row._id)}>
+                                                    <IconButton>
+                                                        <VisibilityIcon color="primary" ></VisibilityIcon>
+                                                    </IconButton>
+                                                </TableCell>
+                                            
+                                            </TableRow>
+                                    ))}
+                                </>
+                                :
+                                     <TableRow>
+                                        <TableCell align="center" colSpan={6}>
+                                        Chưa có lịch sử làm bài nào
+                                        </TableCell>
+                                    </TableRow>
+                                }
+                                </>
+                            }
                             </TableBody>
                         </Table>
                         </TableContainer>

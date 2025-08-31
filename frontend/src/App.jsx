@@ -56,8 +56,11 @@ function App() {
 
                             <Route path="/reading/lich-su-thi/:examId" element={<ReadingHistoryPage />} />
                             <Route path="/listening/lich-su-thi/:examId" element={<ListeningHistoryPage />} />
+
                             <Route path="/reading/lich-su-thi" element={<HistoryReadingMenuPage />} />
                             <Route path="/listening/lich-su-thi" element={<HistoryListeningMenuPage />} />
+
+                            
                             <Route path="/user" element={<UserPage />} />
                             
                         </Route>

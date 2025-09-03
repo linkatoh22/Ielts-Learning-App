@@ -33,7 +33,7 @@ export function SelectListeningPage() {
     }
     return (
         <Box sx={{minHeight:"71.7vh",p:5}}>
-        <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",p:5,justifyContent:"center",border: "1px solid #e0e0e0"}}>
+            <Box sx={{width:"75%",display:"flex",flexDirection:"column",gap:2,margin:"auto",p:5,justifyContent:"center",border: "1px solid #e0e0e0"}}>
             
                 <Typography variant="h4" sx={{fontWeight:"bold",color:"var(--warning-700)"}}>Luyện đề thi Listening</Typography>
                 <Divider></Divider>

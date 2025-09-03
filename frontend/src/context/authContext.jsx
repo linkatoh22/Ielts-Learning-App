@@ -28,6 +28,7 @@ export function AuthProvider ({children}){
         localStorage.removeItem('accessToken')
         localStorage.removeItem('fullName')
         localStorage.removeItem('email')
+        localStorage.removeItem('role')
     }
 
     useEffect(() => {

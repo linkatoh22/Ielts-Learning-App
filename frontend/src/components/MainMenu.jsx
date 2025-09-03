@@ -156,7 +156,7 @@ export default function MainMenu() {
 
 
                     {
-                        role=="admin"?
+                        role=="admin" ?
                         <Button color="inherit" variant="h6" sx={{fontWeight:"bold"}}  onClick={()=>navigate("/admin/dashboard")}>
                             DASHBOARD
                         </Button>

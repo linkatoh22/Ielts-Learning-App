@@ -20,7 +20,7 @@ npm run dev
 ```
 **3. Install Backend:**
 ```bash
-cd frontend
+cd backend
 npm install
 npm run dev
 ```
